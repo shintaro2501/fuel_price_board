@@ -34,16 +34,51 @@
                 margin: 0;
                 max-width: none;
                 width: 100%;
+                padding: 20px;
+                box-sizing: border-box;
                 page-break-inside: avoid;
             }
             
             .location-map {
                 print-color-adjust: exact;
                 -webkit-print-color-adjust: exact;
+                max-width: 100% !important;
+                width: 100% !important;
+                height: 200px !important;
+                object-fit: contain;
+            }
+            
+            .map-container {
+                width: 100%;
+                overflow: hidden;
+            }
+            
+            .price-section {
+                gap: 10px;
+            }
+            
+            .fuel-type {
+                flex: 1;
+                min-width: 0;
+            }
+            
+            .reference-section {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .station-info {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .map-legend {
+                gap: 15px;
+                flex-wrap: wrap;
             }
             
             @page {
-                margin: 15mm;
+                margin: 12mm;
                 size: A4;
             }
         }
