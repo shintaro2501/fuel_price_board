@@ -235,22 +235,22 @@
         .legend-marker {
             width: 24px;
             height: 24px;
-            border-radius: 50%;
-            color: white;
-            font-weight: bold;
-            font-size: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 2px solid white;
+            border-radius: 4px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
         }
         
-        .legend-marker.red {
-            background-color: #ff4444;
+        .legend-marker.rental {
+            background-image: url('./rental-car-icon.svg');
         }
         
-        .legend-marker.blue {
-            background-color: #4285f4;
+        .legend-marker.gas {
+            background-image: url('./gas-station-icon.svg');
         }
         
         .legend-text {
@@ -338,11 +338,11 @@
                 </div>
                 <div class="map-legend">
                     <div class="legend-item">
-                        <span class="legend-marker red">R</span>
+                        <div class="legend-marker rental"></div>
                         <span class="legend-text">トヨタレンタカー新白島駅前店</span>
                     </div>
                     <div class="legend-item">
-                        <span class="legend-marker blue">G</span>
+                        <div class="legend-marker gas"></div>
                         <span class="legend-text">大野石油店 牛田大橋SS</span>
                     </div>
                 </div>
