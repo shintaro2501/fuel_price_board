@@ -414,11 +414,6 @@
         
         /* 印刷スタイル */
         @media print {
-            @page {
-                size: A4;
-                margin: 12mm;
-            }
-            
             body {
                 background: white;
                 padding: 0;
@@ -434,18 +429,23 @@
                 border: 2px solid #f59e0b;
                 margin: 0;
                 max-width: none;
-                width: 100%;
+                width: 95vw;
+                max-height: 95vh;
+                transform: scale(0.95);
                 padding: 20px;
                 box-sizing: border-box;
                 page-break-inside: avoid;
-                transform: scale(0.9);
-                transform-origin: top left;
             }
             
             .location-map {
                 print-color-adjust: exact;
                 -webkit-print-color-adjust: exact;
                 height: 150px !important;
+            }
+            
+            @page {
+                margin: 12mm;
+                size: A4;
             }
         }
     </style>
