@@ -414,10 +414,17 @@
         
         /* 印刷スタイル */
         @media print {
+            @page {
+                size: A4;
+                margin: 12mm;
+            }
+            
             body {
                 background: white;
                 padding: 0;
                 margin: 0;
+                transform: scale(0.9);
+                transform-origin: top left;
             }
             
             .app-controls {
@@ -439,11 +446,6 @@
                 print-color-adjust: exact;
                 -webkit-print-color-adjust: exact;
                 height: 150px !important;
-            }
-            
-            @page {
-                margin: 12mm;
-                size: A4;
             }
         }
     </style>
