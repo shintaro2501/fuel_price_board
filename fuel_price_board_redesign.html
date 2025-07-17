@@ -110,8 +110,8 @@
             background: #fef3c7;
             border: 2px solid #f59e0b;
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
             text-align: center;
         }
         
@@ -208,24 +208,23 @@
         
         .warning-note {
             font-size: 14px;
-            color: #dc2626;
+            color: #374151;
             margin-bottom: 8px;
             display: flex;
             align-items: flex-start;
-            gap: 5px;
+            gap: 8px;
         }
         
         .warning-note::before {
-            content: "▲";
-            color: #dc2626;
-            font-weight: bold;
+            content: "⚠️";
+            font-size: 16px;
         }
         
         .price-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 10px;
+            margin-bottom: 0px;
         }
         
         .section-subtitle {
@@ -289,7 +288,7 @@
             background: #f9fafb;
             border: 2px solid #e5e7eb;
             border-radius: 8px;
-            padding: 20px;
+            padding: 20px 20px 10px 20px;
             margin-bottom: 20px;
         }
         
@@ -375,17 +374,28 @@
         }
         
         .legend-marker {
-            width: 16px;
-            height: 16px;
-            border-radius: 3px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+            border-radius: 4px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
         }
         
         .legend-marker.rental {
-            background: #10b981;
+            background-image: url('./rental-car-icon.svg');
+            width: 30px;
+            height: 30px;
         }
         
         .legend-marker.gas {
-            background: #dc2626;
+            background-image: url('./gas-station-icon.svg');
+            width: 24px;
+            height: 24px;
         }
         
         /* 印刷スタイル */
@@ -452,10 +462,10 @@
             <div class="notice-large">ガソリンスタンドへの立ち寄りは不要！</div>
         </div>
         
-        <div class="section-subtitle">ガソリン代の精算は「燃費精算」をおすすめいたします。</div>
+        <div class="section-subtitle">🚗 ガソリン代の精算は「燃費精算」をおすすめいたします。</div>
         
         <div class="fuel-explanation">
-            <div class="fuel-explanation-title">燃費精算とは？ 車のディスプレイに表示される「平均燃費」を使用して燃料代の精算を実施します。</div>
+            <div class="fuel-explanation-title">📊 車のディスプレイに表示される「平均燃費」を使用して燃料代の精算を実施します。</div>
             
             <div class="fuel-calculation">
                 <div class="calculation-formula">
@@ -488,7 +498,7 @@
         </div>
         
         <div class="price-header">
-            <div class="section-subtitle">当店の燃料単価はこちら</div>
+            <div class="section-subtitle">💰 当店の燃料単価はこちら</div>
             <div class="update-info" id="updateInfo">2025-07-15更新</div>
         </div>
         
@@ -510,7 +520,7 @@
             </div>
         </div>
         
-        <div class="reference-title">現在、下記ガソリンスタンドの価格を採用しております</div>
+        <div class="reference-title">⛽ 現在、下記ガソリンスタンドの価格を採用しております</div>
         
         <div class="reference-section">
             
