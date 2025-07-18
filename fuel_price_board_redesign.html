@@ -389,13 +389,11 @@
         }
         
         .map-legend {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 10px;
-            margin-bottom: 0px;
-            font-size: 12px;
+            transform: scale(0.8);
+            transform-origin: top left;
         }
+        /* それでも足りなければ非表示 */
+        /* .map-legend { display: none !important; } */
         
         .legend-item {
             display: flex;
@@ -430,10 +428,15 @@
         
         /* 印刷スタイル */
         @media print {
-            body {
-                background: white;
-                padding: 0;
+            html, body {
+                width: 100%;
+                height: 100%;
                 margin: 0;
+                padding: 0;
+            }
+            body {
+                box-sizing: border-box;
+                padding: 10mm;
             }
             
             .app-controls {
@@ -452,14 +455,17 @@
             }
             
             .location-map {
-                print-color-adjust: exact;
-                -webkit-print-color-adjust: exact;
-                height: 400px !important;
+                /* 色再現の指定を削除 */
+                /* print-color-adjust: exact; */
+                /* -webkit-print-color-adjust: exact; */
+                height: auto !important;
+                max-height: 150mm !important;
+                overflow: hidden !important;
             }
             
             @page {
-                margin: 12mm;
-                size: A4;
+                size: A4 portrait;
+                margin: 10mm;    /* 上下左右すべて10mmずつ余白 */
             }
         }
     </style>
