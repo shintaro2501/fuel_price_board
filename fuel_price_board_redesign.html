@@ -455,7 +455,7 @@
                 <option value="">読み込み中...</option>
             </select>
         </div>
-        <button class="print-button" onclick="printWith90Percent()">
+        <button class="print-button" onclick="window.print()">
             🖨️ 印刷
         </button>
     </div>
@@ -571,15 +571,11 @@
         let directionsService = null;
         let directionsRenderer = null;
         
-        // CSVファイルを読み込み（Shift_JIS対応）
+        // CSVファイルを読み込み
         async function loadStoresData() {
             try {
                 const response = await fetch('./fuel_prices.csv');
-                const arrayBuffer = await response.arrayBuffer();
-                
-                // Shift_JISデコード
-                const decoder = new TextDecoder('shift_jis');
-                const csvText = decoder.decode(arrayBuffer);
+                const csvText = await response.text();
                 
                 // CSVをパース（簡易版）
                 const lines = csvText.trim().split('\n');
@@ -744,32 +740,6 @@
                 const storeIndex = this.value;
                 updateStoreDisplay(storeIndex);
             });
-        }
-        
-        // 90%スケールで印刷する関数
-        function printWith90Percent() {
-            // 印刷用90%スケールスタイルを追加
-            const printStyle = document.createElement('style');
-            printStyle.id = 'print-scale-style';
-            printStyle.innerHTML = `
-                @media print {
-                    .fuel-board {
-                        transform: scale(0.9);
-                        transform-origin: top left;
-                        margin: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(printStyle);
-            
-            // 印刷実行
-            window.print();
-            
-            // 印刷ダイアログが閉じた後にスタイルを削除
-            setTimeout(() => {
-                const style = document.getElementById('print-scale-style');
-                if (style) style.remove();
-            }, 1000);
         }
         
         // エラーハンドリング
