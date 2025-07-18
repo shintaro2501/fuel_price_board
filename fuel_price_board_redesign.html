@@ -45,6 +45,22 @@
             min-width: 200px;
         }
         
+        .print-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: nowrap;
+            min-width: 0;
+        }
+        
+        .print-settings {
+            font-size: 13px;
+            color: #6b7280;
+            font-weight: 500;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
         .print-button {
             background: #007bff;
             color: white;
@@ -456,9 +472,12 @@
                 <option value="">読み込み中...</option>
             </select>
         </div>
-        <button class="print-button" onclick="window.print()">
-            🖨️ 印刷
-        </button>
+        <div class="print-area">
+            <span class="print-settings">印刷設定：A4・実際のサイズ・ヘッダーフッターなし・背景オンにしてください</span>
+            <button class="print-button" onclick="window.print()">
+                🖨️ 印刷
+            </button>
+        </div>
     </div>
     
     <div class="fuel-board">
