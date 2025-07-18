@@ -571,11 +571,15 @@
         let directionsService = null;
         let directionsRenderer = null;
         
-        // CSVファイルを読み込み
+        // CSVファイルを読み込み（Shift_JIS対応）
         async function loadStoresData() {
             try {
                 const response = await fetch('./fuel_prices.csv');
-                const csvText = await response.text();
+                const arrayBuffer = await response.arrayBuffer();
+                
+                // Shift_JISデコード
+                const decoder = new TextDecoder('shift_jis');
+                const csvText = decoder.decode(arrayBuffer);
                 
                 // CSVをパース（簡易版）
                 const lines = csvText.trim().split('\n');
