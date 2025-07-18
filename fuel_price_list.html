@@ -15,18 +15,18 @@
         
         .app-header {
             text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
+            margin-bottom: 15px;
+            padding: 10px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .app-title {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: bold;
             color: #1f2937;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -34,17 +34,17 @@
         }
         
         .app-subtitle {
-            font-size: 16px;
+            font-size: 14px;
             color: #6b7280;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         
         .app-controls {
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            margin-bottom: 30px;
-            padding: 15px;
+            margin-bottom: 15px;
+            padding: 10px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -86,26 +86,26 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             overflow: hidden;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
         }
         
         .list-header {
             background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             color: white;
-            padding: 15px 20px;
+            padding: 10px 15px;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 16px;
             display: grid;
-            grid-template-columns: 2fr 1.5fr 1fr 1fr 2fr;
-            gap: 15px;
+            grid-template-columns: 2fr 1.2fr 1fr 1fr 2fr;
+            gap: 10px;
             align-items: center;
         }
         
         .store-row {
             display: grid;
-            grid-template-columns: 2fr 1.5fr 1fr 1fr 2fr;
-            gap: 15px;
-            padding: 15px 20px;
+            grid-template-columns: 2fr 1.2fr 1fr 1fr 2fr;
+            gap: 10px;
+            padding: 10px 15px;
             border-bottom: 1px solid #e5e7eb;
             align-items: center;
             transition: background-color 0.3s ease;
@@ -122,32 +122,32 @@
         .store-info {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 3px;
         }
         
         .store-name {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
             color: #1f2937;
         }
         
         .store-address {
-            font-size: 13px;
+            font-size: 11px;
             color: #6b7280;
         }
         
         .update-date {
-            font-size: 13px;
+            font-size: 12px;
             color: #6b7280;
             text-align: center;
         }
         
         .fuel-price {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             text-align: center;
-            padding: 8px 12px;
-            border-radius: 6px;
+            padding: 6px 8px;
+            border-radius: 4px;
             color: white;
         }
         
@@ -160,17 +160,17 @@
         }
         
         .station-info {
-            font-size: 14px;
+            font-size: 12px;
             color: #374151;
         }
         
         .station-name {
             font-weight: bold;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
         
         .station-address {
-            font-size: 12px;
+            font-size: 10px;
             color: #6b7280;
         }
         
@@ -208,7 +208,7 @@
                 background: white;
                 padding: 0;
                 margin: 0;
-                font-size: 12px;
+                font-size: 10px;
             }
             
             .app-controls {
@@ -216,20 +216,27 @@
             }
             
             .app-header {
-                margin-bottom: 20px;
-                padding: 15px 0;
+                margin-bottom: 10px;
+                padding: 5px 0;
                 box-shadow: none;
             }
             
             .app-title {
-                font-size: 24px;
+                font-size: 18px;
                 color: #1f2937 !important;
                 -webkit-text-fill-color: initial;
+                margin-bottom: 3px;
+            }
+            
+            .app-subtitle {
+                font-size: 12px;
+                margin-bottom: 5px;
             }
             
             .stores-list {
                 box-shadow: none;
                 border: 1px solid #000;
+                margin-bottom: 0;
             }
             
             .list-header {
@@ -237,20 +244,64 @@
                 color: #000 !important;
                 print-color-adjust: exact;
                 -webkit-print-color-adjust: exact;
+                padding: 8px 10px;
+                font-size: 11px;
+                display: grid !important;
+                grid-template-columns: 2fr 1.2fr 1fr 1fr 2fr !important;
+                gap: 8px !important;
             }
             
             .store-row {
                 page-break-inside: avoid;
+                padding: 6px 10px;
+                display: grid !important;
+                grid-template-columns: 2fr 1.2fr 1fr 1fr 2fr !important;
+                gap: 8px !important;
+                align-items: center !important;
+            }
+            
+            .store-info {
+                display: block !important;
+            }
+            
+            .store-name {
+                font-size: 10px;
+                margin-bottom: 1px;
+            }
+            
+            .store-address {
+                font-size: 8px;
+            }
+            
+            .update-date {
+                font-size: 9px;
+                text-align: center;
             }
             
             .fuel-price {
                 color: #000 !important;
                 background: #f0f0f0 !important;
                 border: 1px solid #ccc;
+                padding: 4px 6px;
+                font-size: 10px;
+                text-align: center;
+            }
+            
+            .station-info {
+                font-size: 9px;
+            }
+            
+            .station-name {
+                font-size: 9px;
+                margin-bottom: 1px;
+            }
+            
+            .station-address {
+                font-size: 8px;
             }
             
             @page {
-                margin: 15mm;
+                margin: 10mm;
                 size: A4;
             }
         }
