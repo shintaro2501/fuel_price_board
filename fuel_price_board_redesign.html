@@ -65,7 +65,7 @@
             border: 3px solid #f59e0b;
             border-radius: 8px;
             padding: 20px 25px 10px 25px;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
@@ -455,7 +455,7 @@
                 <option value="">読み込み中...</option>
             </select>
         </div>
-        <button class="print-button" onclick="window.print()">
+        <button class="print-button" onclick="printWith90Percent()">
             🖨️ 印刷
         </button>
     </div>
@@ -746,6 +746,32 @@
                 const storeIndex = this.value;
                 updateStoreDisplay(storeIndex);
             });
+        }
+        
+        // 90%スケールで印刷する関数
+        function printWith90Percent() {
+            // 印刷用90%スケールスタイルを追加
+            const printStyle = document.createElement('style');
+            printStyle.id = 'print-scale-style';
+            printStyle.innerHTML = `
+                @media print {
+                    .fuel-board {
+                        transform: scale(0.9);
+                        transform-origin: top left;
+                        margin: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(printStyle);
+            
+            // 印刷実行
+            window.print();
+            
+            // 印刷ダイアログが閉じた後にスタイルを削除
+            setTimeout(() => {
+                const style = document.getElementById('print-scale-style');
+                if (style) style.remove();
+            }, 1000);
         }
         
         // エラーハンドリング
