@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>トヨタレンタカー 燃料単価一覧</title>
+    <title>トヨタレンタリース広島 燃料単価一覧</title>
     <style>
         body {
             font-family: 'Meiryo', 'MS Gothic', sans-serif;
@@ -41,10 +41,8 @@
         
         .app-controls {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
             margin-bottom: 30px;
             padding: 15px;
             background: white;
@@ -127,170 +125,124 @@
             color: #374151;
         }
         
-        .stores-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 20px;
+        .stores-list {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
             margin-bottom: 30px;
         }
         
-        .store-card {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .store-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-            border-color: #f59e0b;
-        }
-        
-        .store-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
+        .list-header {
             background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 18px;
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1fr 1fr 2fr;
+            gap: 15px;
+            align-items: center;
         }
         
-        .store-header {
-            margin-bottom: 15px;
+        .store-row {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1fr 1fr 2fr;
+            gap: 15px;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .store-row:hover {
+            background-color: #f9fafb;
+        }
+        
+        .store-row:last-child {
+            border-bottom: none;
+        }
+        
+        .store-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
         
         .store-name {
-            font-size: 22px;
+            font-size: 16px;
             font-weight: bold;
             color: #1f2937;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .store-name::before {
-            content: '🏢';
-            font-size: 18px;
         }
         
         .store-address {
-            font-size: 14px;
+            font-size: 13px;
             color: #6b7280;
-            margin-bottom: 5px;
-            padding-left: 26px;
         }
         
         .update-date {
-            font-size: 12px;
-            color: #9ca3af;
-            font-weight: bold;
-            text-align: right;
-        }
-        
-        .fuel-prices {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .fuel-price-item {
-            flex: 1;
-            padding: 15px;
-            border-radius: 8px;
+            font-size: 13px;
+            color: #6b7280;
             text-align: center;
-            color: white;
-            position: relative;
         }
         
-        .fuel-price-item.regular {
+        .fuel-price {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            padding: 8px 12px;
+            border-radius: 6px;
+            color: white;
+        }
+        
+        .fuel-price.regular {
             background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
         }
         
-        .fuel-price-item.diesel {
+        .fuel-price.diesel {
             background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
         }
         
-        .fuel-type-label {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 5px;
+        .station-info {
+            font-size: 14px;
+            color: #374151;
         }
         
-        .fuel-price-value {
-            font-size: 28px;
+        .station-name {
             font-weight: bold;
             margin-bottom: 3px;
         }
         
-        .fuel-price-unit {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-        
-        .station-info {
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-        }
-        
-        .station-title {
-            font-size: 14px;
-            font-weight: bold;
-            color: #374151;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .station-title::before {
-            content: '⛽';
-            font-size: 16px;
-        }
-        
-        .station-name {
-            font-size: 16px;
-            font-weight: bold;
-            color: #1f2937;
-            margin-bottom: 5px;
-        }
-        
         .station-address {
-            font-size: 13px;
+            font-size: 12px;
             color: #6b7280;
         }
         
         /* レスポンシブ対応 */
         @media (max-width: 768px) {
-            .stores-grid {
+            .list-header,
+            .store-row {
                 grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .list-header {
+                text-align: center;
+            }
+            
+            .store-row {
+                padding: 15px;
+                text-align: center;
+            }
+            
+            .fuel-price {
+                margin: 5px auto;
+                display: inline-block;
+                min-width: 80px;
             }
             
             .app-controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .sort-controls {
                 justify-content: center;
-            }
-            
-            .print-area {
-                justify-content: center;
-            }
-            
-            .fuel-prices {
-                flex-direction: column;
-                gap: 10px;
             }
         }
         
@@ -300,32 +252,49 @@
                 background: white;
                 padding: 0;
                 margin: 0;
+                font-size: 12px;
             }
             
             .app-controls {
                 display: none !important;
             }
             
-            .stores-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
+            .app-header {
+                margin-bottom: 20px;
+                padding: 15px 0;
+                box-shadow: none;
             }
             
-            .store-card {
+            .app-title {
+                font-size: 24px;
+                color: #1f2937 !important;
+                -webkit-text-fill-color: initial;
+            }
+            
+            .stores-list {
                 box-shadow: none;
-                border: 1px solid #e5e7eb;
-                margin: 0;
-                padding: 15px;
+                border: 1px solid #000;
+            }
+            
+            .list-header {
+                background: #f0f0f0 !important;
+                color: #000 !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            .store-row {
                 page-break-inside: avoid;
             }
             
-            .store-card:hover {
-                transform: none;
-                box-shadow: none;
+            .fuel-price {
+                color: #000 !important;
+                background: #f0f0f0 !important;
+                border: 1px solid #ccc;
             }
             
             @page {
-                margin: 12mm;
+                margin: 15mm;
                 size: A4;
             }
         }
@@ -350,22 +319,11 @@
 </head>
 <body>
     <div class="app-header">
-        <h1 class="app-title">トヨタレンタカー 燃料単価一覧</h1>
-        <p class="app-subtitle">全店舗の燃料単価と採用元ガソリンスタンド情報</p>
+        <h1 class="app-title">トヨタレンタリース広島 燃料単価一覧</h1>
+        <p class="app-subtitle">各店舗の燃料単価と採用元ガソリンスタンド情報</p>
     </div>
     
     <div class="app-controls">
-        <div class="sort-controls">
-            <span class="sort-label">並び替え:</span>
-            <select id="sortSelect" class="sort-dropdown">
-                <option value="name">店舗名順</option>
-                <option value="regular-asc">レギュラー価格（安い順）</option>
-                <option value="regular-desc">レギュラー価格（高い順）</option>
-                <option value="diesel-asc">軽油価格（安い順）</option>
-                <option value="diesel-desc">軽油価格（高い順）</option>
-                <option value="update">更新日順</option>
-            </select>
-        </div>
         <div class="print-area">
             <span class="print-settings">印刷設定：A4・実際のサイズ・ヘッダーフッターなし</span>
             <button class="print-button" onclick="window.print()">
@@ -374,14 +332,17 @@
         </div>
     </div>
     
-    <div class="summary-info">
-        <div class="summary-text">燃費精算をご利用ください</div>
-        <div class="summary-detail">お車をお返しいただく際は「燃費精算」で給油の手間なし！店舗でお支払いいただけます</div>
-    </div>
-    
     <div id="loading" class="loading">データを読み込み中...</div>
     <div id="error" class="error" style="display: none;">データの読み込みに失敗しました</div>
-    <div id="storesContainer" class="stores-grid" style="display: none;"></div>
+    <div id="storesContainer" class="stores-list" style="display: none;">
+        <div class="list-header">
+            <div>店舗名・住所</div>
+            <div>更新日</div>
+            <div>レギュラー</div>
+            <div>軽油</div>
+            <div>採用元ガソリンスタンド</div>
+        </div>
+    </div>
     
     <script>
         let storesData = [];
@@ -426,50 +387,39 @@
             }
         }
         
-        // 店舗カードを表示
+        // 店舗リストを表示
         function displayStores() {
             const container = document.getElementById('storesContainer');
-            container.innerHTML = '';
+            // ヘッダー以外の行を削除
+            const existingRows = container.querySelectorAll('.store-row');
+            existingRows.forEach(row => row.remove());
             
             storesData.forEach(store => {
-                const card = createStoreCard(store);
-                container.appendChild(card);
+                const row = createStoreRow(store);
+                container.appendChild(row);
             });
         }
         
-        // 店舗カードを作成
-        function createStoreCard(store) {
-            const card = document.createElement('div');
-            card.className = 'store-card';
+        // 店舗行を作成
+        function createStoreRow(store) {
+            const row = document.createElement('div');
+            row.className = 'store-row';
             
-            card.innerHTML = `
-                <div class="store-header">
+            row.innerHTML = `
+                <div class="store-info">
                     <div class="store-name">${store['店舗名']}</div>
                     <div class="store-address">${store['店舗住所']}</div>
-                    <div class="update-date">${store['更新日']}更新</div>
                 </div>
-                
-                <div class="fuel-prices">
-                    <div class="fuel-price-item regular">
-                        <div class="fuel-type-label">レギュラー</div>
-                        <div class="fuel-price-value">${store['レギュラー単価']}</div>
-                        <div class="fuel-price-unit">円/L</div>
-                    </div>
-                    <div class="fuel-price-item diesel">
-                        <div class="fuel-type-label">軽 油</div>
-                        <div class="fuel-price-value">${store['軽油単価']}</div>
-                        <div class="fuel-price-unit">円/L</div>
-                    </div>
-                </div>
-                
+                <div class="update-date">${store['更新日']}</div>
+                <div class="fuel-price regular">${store['レギュラー単価']}円/L</div>
+                <div class="fuel-price diesel">${store['軽油単価']}円/L</div>
                 <div class="station-info">
-                    <div class="station-title">採用元ガソリンスタンド</div>
                     <div class="station-name">${store['スタンド名']}</div>
                     <div class="station-address">${store['スタンド住所']}</div>
                 </div>
             `;
             
-            return card;
+            return row;
         }
         
         // ソート機能
