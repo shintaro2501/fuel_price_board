@@ -50,29 +50,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
-        .sort-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .sort-label {
-            font-weight: bold;
-            color: #495057;
-            font-size: 16px;
-        }
-        
-        .sort-dropdown {
-            padding: 8px 12px;
-            border: 2px solid #ced4da;
-            border-radius: 5px;
-            font-size: 16px;
-            background: white;
-            cursor: pointer;
-            min-width: 200px;
-        }
-        
         .print-area {
             display: flex;
             align-items: center;
@@ -102,27 +79,6 @@
         
         .print-button:hover {
             background: #0056b3;
-        }
-        
-        .summary-info {
-            background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 100%);
-            border: 2px solid #f59e0b;
-            border-radius: 8px;
-            padding: 15px 20px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .summary-text {
-            font-size: 18px;
-            font-weight: bold;
-            color: #1f2937;
-            margin-bottom: 10px;
-        }
-        
-        .summary-detail {
-            font-size: 14px;
-            color: #374151;
         }
         
         .stores-list {
@@ -344,7 +300,6 @@
         </div>
     </div>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script>
         let storesData = [];
         
@@ -352,39 +307,30 @@
         async function loadStoresData() {
             try {
                 const response = await fetch('./fuel_prices.csv');
-                if (!response.ok) {
-                    throw new Error('CSVファイルが見つかりません');
-                }
-                
                 const csvText = await response.text();
                 
-                // CSVをパース（簡易版）
+                // CSVをパース（元ファイルと同じ方式）
                 const lines = csvText.trim().split('\n');
-                const headers = lines[0].split(',').map(h => h.trim());
+                const headers = lines[0].split(',');
                 
                 storesData = lines.slice(1).map(line => {
                     const values = line.split(',');
                     const store = {};
                     headers.forEach((header, index) => {
-                        let value = values[index] ? values[index].trim() : '';
-                        // 数値の変換
-                        if (header === 'レギュラー単価' || header === '軽油単価') {
-                            value = parseInt(value) || 0;
-                        }
-                        store[header] = value;
+                        store[header.trim()] = values[index] ? values[index].trim() : '';
                     });
                     return store;
                 });
                 
                 displayStores();
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('storesContainer').style.display = 'grid';
+                document.getElementById('storesContainer').style.display = 'block';
                 
             } catch (error) {
                 console.error('CSVファイルの読み込みエラー:', error);
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'block';
-                document.getElementById('error').textContent = error.message;
+                document.getElementById('error').textContent = 'CSVファイルが見つかりません';
             }
         }
         
@@ -422,40 +368,6 @@
             
             return row;
         }
-        
-        // ソート機能
-        function sortStores(sortType) {
-            let sortedData = [...storesData];
-            
-            switch (sortType) {
-                case 'name':
-                    sortedData.sort((a, b) => a['店舗名'].localeCompare(b['店舗名'], 'ja'));
-                    break;
-                case 'regular-asc':
-                    sortedData.sort((a, b) => a['レギュラー単価'] - b['レギュラー単価']);
-                    break;
-                case 'regular-desc':
-                    sortedData.sort((a, b) => b['レギュラー単価'] - a['レギュラー単価']);
-                    break;
-                case 'diesel-asc':
-                    sortedData.sort((a, b) => a['軽油単価'] - b['軽油単価']);
-                    break;
-                case 'diesel-desc':
-                    sortedData.sort((a, b) => b['軽油単価'] - a['軽油単価']);
-                    break;
-                case 'update':
-                    sortedData.sort((a, b) => new Date(b['更新日']) - new Date(a['更新日']));
-                    break;
-            }
-            
-            storesData = sortedData;
-            displayStores();
-        }
-        
-        // イベントリスナー
-        document.getElementById('sortSelect').addEventListener('change', function() {
-            sortStores(this.value);
-        });
         
         // 初期化
         document.addEventListener('DOMContentLoaded', function() {
