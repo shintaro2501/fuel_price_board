@@ -452,17 +452,14 @@
             }
             
             .location-map {
-                /* 色再現の指定を削除 */
-                /* print-color-adjust: exact; */
-                /* -webkit-print-color-adjust: exact; */
-                height: auto !important;
-                max-height: 150mm !important;
-                overflow: hidden !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+                height: 400px !important;
             }
             
             @page {
-                size: A4 portrait;
-                margin: 10mm;    /* 上下左右すべて10mmずつ余白 */
+                margin: 12mm;
+                size: A4;
             }
         }
     </style>
