@@ -66,7 +66,7 @@
         }
         
         .app-title {
-            font-size: 38px;
+            font-size: 48px;
             font-weight: bold;
             color: #1f2937;
             margin-bottom: 6px;
@@ -77,7 +77,7 @@
         }
         
         .app-subtitle {
-            font-size: 20px;
+            font-size: 18px;
             color: #6b7280;
             margin-bottom: 8px;
         }
@@ -88,16 +88,18 @@
         }
         
         .price-note {
-            position: static;
-            text-align: right;
+            position: absolute;
+            top: -20px;
+            right: 0;
             background: none;
             color: #374151;
             padding: 0;
-            font-size: 11px;
+            font-size: 14px;
             font-weight: 500;
             border: none;
             box-shadow: none;
-            margin-bottom: 8px;
+            z-index: 10;
+            margin-bottom: 5px;
         }
         
         .table-container {
@@ -121,10 +123,10 @@
         .fuel-table th {
             background: none !important;
             color: white !important;
-            padding: 10px 8px;
+            padding: 15px 12px;
             text-align: center;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 16px;
             border-right: 2px solid rgba(255, 255, 255, 0.3);
         }
         
@@ -138,7 +140,7 @@
         }
         
         .fuel-table td {
-            padding: 12px 8px;
+            padding: 18px 12px;
             text-align: center;
             border-bottom: 1px solid #e5e7eb;
             border-right: 1px solid #e5e7eb;
@@ -162,30 +164,30 @@
         }
         
         .store-name {
-            font-size: 12px;
+            font-size: 16px;
             font-weight: bold;
             color: #1f2937;
-            margin-bottom: 3px;
+            margin-bottom: 5px;
         }
         
         .store-address {
-            font-size: 10px;
+            font-size: 13px;
             color: #6b7280;
         }
         
         .update-date {
-            font-size: 11px;
+            font-size: 14px;
             color: #6b7280;
         }
         
         .fuel-price {
-            font-size: 14px;
+            font-size: 18px;
             font-weight: bold;
-            padding: 6px 8px;
+            padding: 8px 12px;
             border-radius: 4px;
             color: white;
             display: inline-block;
-            min-width: 70px;
+            min-width: 90px;
         }
         
         .fuel-price.regular {
@@ -201,14 +203,14 @@
         }
         
         .station-name {
-            font-size: 11px;
+            font-size: 14px;
             font-weight: bold;
             color: #374151;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
         
         .station-address {
-            font-size: 9px;
+            font-size: 12px;
             color: #6b7280;
         }
         
@@ -275,7 +277,7 @@
             }
             
             .app-title {
-                font-size: 24px;
+                font-size: 32px;
                 color: #1f2937;
                 background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
                 -webkit-background-clip: text;
@@ -288,7 +290,7 @@
             }
             
             .app-subtitle {
-                font-size: 12px;
+                font-size: 14px;
                 margin-bottom: 6px;
                 page-break-after: avoid;
             }
@@ -298,14 +300,17 @@
             }
             
             .price-note {
-                text-align: right;
+                position: absolute;
+                top: -15px;
+                right: 0;
                 background: none;
                 color: #000;
                 padding: 0;
                 border: none;
-                font-size: 9px;
+                font-size: 12px;
                 font-weight: normal;
-                margin-bottom: 5px;
+                z-index: 10;
+                margin-bottom: 3px;
             }
             
             .table-container {
@@ -409,7 +414,7 @@
 <body>
     <div class="app-controls">
         <div class="print-area">
-            <span class="print-settings">印刷設定：A4・縮小90％・ヘッダーフッターなし</span>
+            <span class="print-settings">印刷設定：A4・実際のサイズ・ヘッダーフッターなし</span>
             <button class="print-button" onclick="window.print()">
                 🖨️ 印刷
             </button>
