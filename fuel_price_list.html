@@ -13,33 +13,6 @@
             line-height: 1.6;
         }
         
-        .app-header {
-            text-align: center;
-            margin-bottom: 15px;
-            padding: 15px;
-            background: white;
-            border: 3px solid #22c55e;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .app-title {
-            font-size: 36px;
-            font-weight: bold;
-            color: #1f2937;
-            margin-bottom: 5px;
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .app-subtitle {
-            font-size: 14px;
-            color: #6b7280;
-            margin-bottom: 10px;
-        }
-        
         .app-controls {
             display: flex;
             justify-content: flex-end;
@@ -82,7 +55,34 @@
             background: #0056b3;
         }
         
-        .stores-list {
+        .app-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border: 3px solid #22c55e;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .app-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .app-subtitle {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+        
+        .table-container {
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -90,46 +90,55 @@
             margin-bottom: 15px;
         }
         
-        .list-header {
+        .fuel-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        .fuel-table th {
             background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
             color: white;
-            padding: 10px 15px;
+            padding: 12px 10px;
+            text-align: center;
             font-weight: bold;
             font-size: 16px;
-            display: grid;
-            grid-template-columns: 2.2fr 0.7fr 1fr 1fr 2.5fr;
-            gap: 8px;
-            align-items: center;
+            border-right: 2px solid rgba(255, 255, 255, 0.3);
         }
         
-        .store-row {
-            display: grid;
-            grid-template-columns: 2.2fr 0.7fr 1fr 1fr 2.5fr;
-            gap: 8px;
-            padding: 12px 15px;
+        .fuel-table th:last-child {
+            border-right: none;
+        }
+        
+        .fuel-table td {
+            padding: 12px 10px;
+            text-align: center;
             border-bottom: 1px solid #e5e7eb;
-            align-items: center;
-            transition: background-color 0.3s ease;
+            border-right: 1px solid #e5e7eb;
+            vertical-align: middle;
         }
         
-        .store-row:hover {
-            background-color: #f9fafb;
+        .fuel-table td:last-child {
+            border-right: none;
         }
         
-        .store-row:last-child {
+        .fuel-table tr:last-child td {
             border-bottom: none;
         }
         
+        .fuel-table tr:hover {
+            background-color: #f9fafb;
+        }
+        
         .store-info {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
+            text-align: center;
         }
         
         .store-name {
             font-size: 14px;
             font-weight: bold;
             color: #1f2937;
+            margin-bottom: 3px;
         }
         
         .store-address {
@@ -140,16 +149,16 @@
         .update-date {
             font-size: 12px;
             color: #6b7280;
-            text-align: center;
         }
         
         .fuel-price {
             font-size: 16px;
             font-weight: bold;
-            text-align: center;
             padding: 6px 8px;
             border-radius: 4px;
             color: white;
+            display: inline-block;
+            min-width: 80px;
         }
         
         .fuel-price.regular {
@@ -161,48 +170,55 @@
         }
         
         .station-info {
-            font-size: 12px;
-            color: #374151;
             text-align: center;
         }
         
         .station-name {
+            font-size: 12px;
             font-weight: bold;
+            color: #374151;
             margin-bottom: 2px;
-            text-align: center;
         }
         
         .station-address {
             font-size: 10px;
             color: #6b7280;
-            text-align: center;
         }
         
         /* レスポンシブ対応 */
         @media (max-width: 768px) {
-            .list-header,
-            .store-row {
-                grid-template-columns: 1fr;
-                gap: 10px;
+            .app-controls {
+                justify-content: center;
             }
             
-            .list-header {
-                text-align: center;
+            .app-title {
+                font-size: 28px;
             }
             
-            .store-row {
-                padding: 15px;
-                text-align: center;
+            .fuel-table {
+                font-size: 12px;
+            }
+            
+            .fuel-table th {
+                padding: 8px 5px;
+                font-size: 14px;
+            }
+            
+            .fuel-table td {
+                padding: 8px 5px;
+            }
+            
+            .store-name {
+                font-size: 12px;
+            }
+            
+            .store-address {
+                font-size: 10px;
             }
             
             .fuel-price {
-                margin: 5px auto;
-                display: inline-block;
-                min-width: 80px;
-            }
-            
-            .app-controls {
-                justify-content: center;
+                font-size: 14px;
+                min-width: 70px;
             }
         }
         
@@ -246,45 +262,34 @@
                 page-break-after: avoid;
             }
             
-            .stores-list {
+            .table-container {
                 box-shadow: none;
                 border: 1px solid #000;
                 margin-bottom: 0;
             }
             
-            .list-header {
+            .fuel-table {
+                font-size: 10px;
+            }
+            
+            .fuel-table th {
                 background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
                 color: white !important;
                 print-color-adjust: exact;
                 -webkit-print-color-adjust: exact;
-                padding: 8px 10px;
+                padding: 6px 5px;
                 font-size: 11px;
-                display: grid !important;
-                grid-template-columns: 2.2fr 0.7fr 1fr 1fr 2.5fr !important;
-                gap: 6px !important;
+                border-right: 1px solid rgba(255, 255, 255, 0.5);
             }
             
-            .list-header > *:not(:last-child) {
-                border-right: 1px solid rgba(255, 255, 255, 0.5) !important;
-                padding-right: 3px;
+            .fuel-table td {
+                padding: 6px 5px;
+                border-right: 1px solid #ccc;
+                border-bottom: 1px solid #ccc;
             }
             
-            .store-row {
+            .fuel-table tr {
                 page-break-inside: avoid;
-                padding: 8px 10px;
-                display: grid !important;
-                grid-template-columns: 2.2fr 0.7fr 1fr 1fr 2.5fr !important;
-                gap: 6px !important;
-                align-items: center !important;
-            }
-            
-            .store-row > *:not(:last-child) {
-                border-right: 1px solid #ccc !important;
-                padding-right: 3px;
-            }
-            
-            .store-info {
-                display: block !important;
             }
             
             .store-name {
@@ -298,16 +303,14 @@
             
             .update-date {
                 font-size: 9px;
-                text-align: center;
             }
             
             .fuel-price {
                 color: white !important;
                 print-color-adjust: exact;
                 -webkit-print-color-adjust: exact;
-                padding: 4px 6px;
                 font-size: 10px;
-                text-align: center;
+                min-width: 60px;
             }
             
             .fuel-price.regular {
@@ -316,10 +319,6 @@
             
             .fuel-price.diesel {
                 background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%) !important;
-            }
-            
-            .station-info {
-                font-size: 9px;
             }
             
             .station-name {
@@ -372,14 +371,22 @@
     
     <div id="loading" class="loading">データを読み込み中...</div>
     <div id="error" class="error" style="display: none;">データの読み込みに失敗しました</div>
-    <div id="storesContainer" class="stores-list" style="display: none;">
-        <div class="list-header">
-            <div>店舗名・住所</div>
-            <div>更新日</div>
-            <div>レギュラー</div>
-            <div>軽油</div>
-            <div>採用元ガソリンスタンド</div>
-        </div>
+    
+    <div id="tableContainer" class="table-container" style="display: none;">
+        <table class="fuel-table">
+            <thead>
+                <tr>
+                    <th>店舗名・住所</th>
+                    <th>更新日</th>
+                    <th>レギュラー</th>
+                    <th>軽油</th>
+                    <th>採用元ガソリンスタンド</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- データはJavaScriptで挿入 -->
+            </tbody>
+        </table>
     </div>
     
     <script>
@@ -406,7 +413,7 @@
                 
                 displayStores();
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('storesContainer').style.display = 'block';
+                document.getElementById('tableContainer').style.display = 'block';
                 
             } catch (error) {
                 console.error('CSVファイルの読み込みエラー:', error);
@@ -416,36 +423,43 @@
             }
         }
         
-        // 店舗リストを表示
+        // 店舗テーブルを表示
         function displayStores() {
-            const container = document.getElementById('storesContainer');
-            // ヘッダー以外の行を削除
-            const existingRows = container.querySelectorAll('.store-row');
-            existingRows.forEach(row => row.remove());
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
             
             storesData.forEach(store => {
-                const row = createStoreRow(store);
-                container.appendChild(row);
+                const row = createTableRow(store);
+                tbody.appendChild(row);
             });
         }
         
-        // 店舗行を作成
-        function createStoreRow(store) {
-            const row = document.createElement('div');
-            row.className = 'store-row';
+        // テーブル行を作成
+        function createTableRow(store) {
+            const row = document.createElement('tr');
             
             row.innerHTML = `
-                <div class="store-info">
-                    <div class="store-name">${store['店舗名']}</div>
-                    <div class="store-address">${store['店舗住所']}</div>
-                </div>
-                <div class="update-date">${store['更新日']}</div>
-                <div class="fuel-price regular">${store['レギュラー単価']}円/L</div>
-                <div class="fuel-price diesel">${store['軽油単価']}円/L</div>
-                <div class="station-info">
-                    <div class="station-name">${store['スタンド名']}</div>
-                    <div class="station-address">${store['スタンド住所']}</div>
-                </div>
+                <td>
+                    <div class="store-info">
+                        <div class="store-name">${store['店舗名']}</div>
+                        <div class="store-address">${store['店舗住所']}</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="update-date">${store['更新日']}</div>
+                </td>
+                <td>
+                    <div class="fuel-price regular">${store['レギュラー単価']}円/L</div>
+                </td>
+                <td>
+                    <div class="fuel-price diesel">${store['軽油単価']}円/L</div>
+                </td>
+                <td>
+                    <div class="station-info">
+                        <div class="station-name">${store['スタンド名']}</div>
+                        <div class="station-address">${store['スタンド住所']}</div>
+                    </div>
+                </td>
             `;
             
             return row;
