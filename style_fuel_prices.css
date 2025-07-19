@@ -65,7 +65,7 @@ body {
 
 /* タイトル文字 */
 .app-title-text {
-    font-size: 48px;
+    font-size: 42px;
     font-weight: bold;
     color: #1f2937;
     background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
