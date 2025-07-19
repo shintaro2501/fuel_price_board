@@ -1,36 +1,42 @@
 /* ============================
-   ƒy[ƒW‘S‘Ì‚ÌŠî–{İ’è
+   ãƒšãƒ¼ã‚¸å…¨ä½“ã®åŸºæœ¬è¨­å®š
    ============================ */
 body {
     font-family: 'Meiryo', 'MS Gothic', sans-serif;
     margin: 0;
     padding: 20px;
-    background: #f5f5f5; /* ƒy[ƒW‘S‘Ì‚Ì”wŒiF */
+    background: #f5f5f5;
     line-height: 1.6;
 }
 
 /* ============================
-   ã•”ƒRƒ“ƒgƒ[ƒ‹ƒo[
+   ä¸Šéƒ¨ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãƒãƒ¼
    ============================ */
 .app-controls {
     display: flex;
-    justify-content: flex-end; /* ˆóüİ’èEƒ{ƒ^ƒ“‚ğ‰EŠñ‚¹ */
+    justify-content: flex-end;
     align-items: center;
     margin-bottom: 15px;
     padding: 10px;
-    background: white; /* ƒo[‚Ì”wŒi */
-    border-radius: 8px; /* ŠpŠÛ */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Œy‚¢‰e */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.print-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .print-settings {
     font-size: 13px;
-    color: #6b7280; /* à–¾•¶‚Ì•¶šF */
+    color: #6b7280;
     font-weight: 500;
 }
 
 .print-button {
-    background: #007bff; /* ƒ{ƒ^ƒ“‚Ì”wŒiF */
+    background: #007bff;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -41,57 +47,68 @@ body {
 }
 
 .print-button:hover {
-    background: #0056b3; /* ƒzƒo[‚ÌF */
+    background: #0056b3;
 }
 
 /* ============================
-   ƒy[ƒWƒwƒbƒ_[
+   ãƒšãƒ¼ã‚¸ãƒ˜ãƒƒãƒ€ãƒ¼
    ============================ */
 .app-header {
-	text-align: center;
-	margin-bottom: 10px;
-	padding-top: 12px;
-	background: white;
-	border: 3px solid #22c55e; /* —ÎF‚Ìƒtƒ` */
-	border-radius: 8px;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-	overflow: hidden; /* margin collapse–h~ */
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 20px;
+    background: white;
+    border: 3px solid #22c55e;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* ƒ^ƒCƒgƒ‹•¶šidivƒx[ƒXj */
+/* ã‚¿ã‚¤ãƒˆãƒ«æ–‡å­— */
 .app-title-text {
-	font-size: 48px;         /* ƒ^ƒCƒgƒ‹•¶šƒTƒCƒY */
-	font-weight: bold;
-	color: #1f2937;
-	background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	padding-right: 0;
-	padding-left: 0;         /* ƒ^ƒCƒgƒ‹•¶šã‰º‚ÌƒpƒfƒBƒ“ƒO */
-	margin-top: 7px;
-	margin-right: 0;
-	margin-left: 0;          /* ã‰ºƒ}[ƒWƒ“ */
-	display: inline-block;   /* ”wŒiƒOƒ‰ƒf[ƒVƒ‡ƒ“—p */
-	line-height: 1.2;
+    font-size: 48px;
+    font-weight: bold;
+    color: #1f2937;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    padding: 10px 0 5px 0;
+    line-height: 1.2;
 }
 
-/* ƒTƒuƒ^ƒCƒgƒ‹idivƒx[ƒXj */
+/* ã‚µãƒ–ã‚¿ã‚¤ãƒˆãƒ« */
 .app-subtitle {
-	font-size: 18px;
-	color: #6b7280;        /* ƒ^ƒCƒgƒ‹‚Æ‚ÌŠÔ‚Ì—]”’ */
-	margin-bottom: 15px;     /* ƒTƒuƒ^ƒCƒgƒ‹‰º‚Ì—]”’ */
-	line-height: 1.4;
+    font-size: 18px;
+    color: #6b7280;
+    margin: 5px 0 0 0;
+    line-height: 1.4;
 }
 
+/* ä¾¡æ ¼æ³¨è¨˜ */
 .price-note {
-	text-align: right; /* ?? ‰EŠñ‚¹ */
-	font-size: 14px;
-	color: #6b7280; /* ”–‚¢ƒOƒŒ[‚Å—‚¿’…‚¢‚½F‡‚¢ */
-	margin-bottom: 2px; /* ƒe[ƒuƒ‹‚Æ‚ÌŠÔ‚É­‚µ—]”’ */
+    text-align: right;
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 5px;
 }
 
 /* ============================
-   ƒe[ƒuƒ‹‘S‘Ì‚Ì‘•ü
+   ãƒ†ãƒ¼ãƒ–ãƒ«ã‚³ãƒ³ãƒ†ãƒŠ
+   ============================ */
+.table-wrapper {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+/* ============================
+   ãƒ†ãƒ¼ãƒ–ãƒ«å…¨ä½“ã®è£…é£¾
    ============================ */
 .fuel-table {
     width: 100%;
@@ -99,7 +116,6 @@ body {
     font-size: 14px;
     background: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     overflow: hidden;
 }
 
@@ -114,6 +130,7 @@ body {
     font-weight: bold;
     font-size: 16px;
     border-right: 2px solid rgba(255, 255, 255, 0.3);
+    white-space: nowrap;
 }
 
 .fuel-table th:last-child {
@@ -121,9 +138,9 @@ body {
 }
 
 .fuel-table td {
-	padding: 8px;
-	text-align: center;
-	border-bottom: 1px solid #e5e7eb;
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .fuel-table tr:last-child td {
@@ -135,7 +152,7 @@ body {
 }
 
 /* ============================
-   ƒŒƒMƒ…ƒ‰[’P‰¿EŒy–û’P‰¿‚Ì‘•ü
+   ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼å˜ä¾¡ãƒ»è»½æ²¹å˜ä¾¡ã®è£…é£¾
    ============================ */
 .fuel-price {
     font-size: 16px;
@@ -149,30 +166,47 @@ body {
 }
 
 .fuel-price.regular {
-    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%); /* ƒŒƒMƒ…ƒ‰[: ÔŒnƒOƒ‰ƒf[ƒVƒ‡ƒ“ */
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
 }
 
 .fuel-price.diesel {
-    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%); /* Œy–û: —ÎŒnƒOƒ‰ƒf[ƒVƒ‡ƒ“ */
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
 }
 
 /* ============================
-   “X•Ü–¼EƒKƒ\ƒŠƒ“ƒXƒ^ƒ“ƒh–¼‚ğ‘¾š
+   åº—èˆ—åãƒ»ã‚¬ã‚½ãƒªãƒ³ã‚¹ã‚¿ãƒ³ãƒ‰å
    ============================ */
+.store-info {
+    text-align: center;
+}
+
 .store-name {
     font-weight: bold;
+    font-size: 14px;
+}
+
+.update-date {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.station-info {
+    text-align: center;
 }
 
 .station-name {
     font-weight: bold;
+    font-size: 14px;
 }
 
 .station-address {
-    font-size: 13px; /* ?? Œ³‚æ‚è1ƒ|ƒCƒ“ƒg¬‚³‚­ */
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 2px;
 }
 
 /* ============================
-   ƒ[ƒfƒBƒ“ƒOEƒGƒ‰[ƒƒbƒZ[ƒW
+   ãƒ­ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ãƒ»ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
    ============================ */
 .loading {
     text-align: center;
@@ -189,197 +223,124 @@ body {
     text-align: center;
     color: #dc2626;
     font-weight: bold;
-}
-.table-container .fuel-table #tableBody {
-}
-
-/* ============================
-   ƒy[ƒW‘S‘Ì‚ÌŠî–{İ’è
-   ============================ */
-body {
-    font-family: 'Meiryo', 'MS Gothic', sans-serif;
-    margin: 0;
-    padding: 20px;
-    background: #f5f5f5; /* ƒy[ƒW‘S‘Ì‚Ì”wŒiF */
-    line-height: 1.6;
+    margin: 20px;
 }
 
 /* ============================
-   ã•”ƒRƒ“ƒgƒ[ƒ‹ƒo[
+   å°åˆ·ç”¨ã‚¹ã‚¿ã‚¤ãƒ«
    ============================ */
-.app-controls {
-    display: flex;
-    justify-content: flex-end; /* ˆóüİ’èEƒ{ƒ^ƒ“‚ğ‰EŠñ‚¹ */
-    align-items: center;
-    margin-bottom: 15px;
-    padding: 10px;
-    background: white; /* ƒo[‚Ì”wŒi */
-    border-radius: 8px; /* ŠpŠÛ */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Œy‚¢‰e */
-}
-
-.print-settings {
-    font-size: 13px;
-    color: #6b7280; /* à–¾•¶‚Ì•¶šF */
-    font-weight: 500;
-}
-
-.print-button {
-    background: #007bff; /* ƒ{ƒ^ƒ“‚Ì”wŒiF */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.print-button:hover {
-    background: #0056b3; /* ƒzƒo[‚ÌF */
-}
-
-/* ============================
-   ƒy[ƒWƒwƒbƒ_[
-   ============================ */
-.app-header {
-	text-align: center;
-	margin-bottom: 10px;
-	padding-top: 12px;
-	background: white;
-	border: 3px solid #22c55e; /* —ÎF‚Ìƒtƒ` */
-	border-radius: 8px;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-	overflow: hidden; /* margin collapse–h~ */
-}
-
-/* ƒ^ƒCƒgƒ‹•¶šidivƒx[ƒXj */
-.app-title-text {
-	font-size: 48px;         /* ƒ^ƒCƒgƒ‹•¶šƒTƒCƒY */
-	font-weight: bold;
-	color: #1f2937;
-	background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	padding-right: 0;
-	padding-left: 0;         /* ƒ^ƒCƒgƒ‹•¶šã‰º‚ÌƒpƒfƒBƒ“ƒO */
-	margin-top: 7px;
-	margin-right: 0;
-	margin-left: 0;          /* ã‰ºƒ}[ƒWƒ“ */
-	display: inline-block;   /* ”wŒiƒOƒ‰ƒf[ƒVƒ‡ƒ“—p */
-	line-height: 1.2;
-}
-
-/* ƒTƒuƒ^ƒCƒgƒ‹idivƒx[ƒXj */
-.app-subtitle {
-	font-size: 18px;
-	color: #6b7280;        /* ƒ^ƒCƒgƒ‹‚Æ‚ÌŠÔ‚Ì—]”’ */
-	margin-bottom: 15px;     /* ƒTƒuƒ^ƒCƒgƒ‹‰º‚Ì—]”’ */
-	line-height: 1.4;
-}
-
-.price-note {
-	text-align: right; /* ?? ‰EŠñ‚¹ */
-	font-size: 14px;
-	color: #6b7280; /* ”–‚¢ƒOƒŒ[‚Å—‚¿’…‚¢‚½F‡‚¢ */
-	margin-bottom: 2px; /* ƒe[ƒuƒ‹‚Æ‚ÌŠÔ‚É­‚µ—]”’ */
-}
-
-/* ============================
-   ƒe[ƒuƒ‹‘S‘Ì‚Ì‘•ü
-   ============================ */
-.fuel-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    overflow: hidden;
-}
-
-.fuel-table thead {
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-    color: white;
-}
-
-.fuel-table th {
-    padding: 15px 12px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 16px;
-    border-right: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.fuel-table th:last-child {
-    border-right: none;
-}
-
-.fuel-table td {
-	padding: 8px;
-	text-align: center;
-	border-bottom: 1px solid #e5e7eb;
-}
-
-.fuel-table tr:last-child td {
-    border-bottom: none;
-}
-
-.fuel-table tbody tr:hover {
-    background-color: #f9fafb;
-}
-
-/* ============================
-   ƒŒƒMƒ…ƒ‰[’P‰¿EŒy–û’P‰¿‚Ì‘•ü
-   ============================ */
-.fuel-price {
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
-    display: inline-block;
-    min-width: 80px;
-    text-align: center;
-}
-
-.fuel-price.regular {
-    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%); /* ƒŒƒMƒ…ƒ‰[: ÔŒnƒOƒ‰ƒf[ƒVƒ‡ƒ“ */
-}
-
-.fuel-price.diesel {
-    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%); /* Œy–û: —ÎŒnƒOƒ‰ƒf[ƒVƒ‡ƒ“ */
-}
-
-/* ============================
-   “X•Ü–¼EƒKƒ\ƒŠƒ“ƒXƒ^ƒ“ƒh–¼‚ğ‘¾š
-   ============================ */
-.store-name {
-    font-weight: bold;
-}
-
-.station-name {
-    font-weight: bold;
-}
-
-/* ============================
-   ƒ[ƒfƒBƒ“ƒOEƒGƒ‰[ƒƒbƒZ[ƒW
-   ============================ */
-.loading {
-    text-align: center;
-    padding: 40px;
-    color: #6b7280;
-    font-size: 16px;
-}
-
-.error {
-    background: #fee2e2;
-    border: 2px solid #f87171;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    color: #dc2626;
-    font-weight: bold;
-}
-.table-container .fuel-table #tableBody {
+@media print {
+    * {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    body {
+        background: white;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãƒãƒ¼ã‚’éè¡¨ç¤º */
+    .app-controls {
+        display: none !important;
+    }
+    
+    /* ãƒšãƒ¼ã‚¸ãƒ˜ãƒƒãƒ€ãƒ¼ã®èª¿æ•´ */
+    .app-header {
+        margin: 0 0 10px 0;
+        padding: 15px;
+        border: 2px solid #22c55e;
+        page-break-inside: avoid;
+    }
+    
+    .app-title-text {
+        font-size: 32px;
+        padding: 5px 0;
+    }
+    
+    .app-subtitle {
+        font-size: 14px;
+        margin: 5px 0 0 0;
+    }
+    
+    /* ä¾¡æ ¼æ³¨è¨˜ */
+    .price-note {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+    
+    /* ãƒ†ãƒ¼ãƒ–ãƒ«ãƒ©ãƒƒãƒ‘ãƒ¼ */
+    .table-wrapper {
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* ãƒ†ãƒ¼ãƒ–ãƒ«ã®èª¿æ•´ */
+    .fuel-table {
+        font-size: 11px;
+        width: 100%;
+        page-break-inside: auto;
+    }
+    
+    .fuel-table thead {
+        display: table-header-group;
+    }
+    
+    .fuel-table tbody {
+        display: table-row-group;
+    }
+    
+    .fuel-table th {
+        padding: 8px 6px;
+        font-size: 12px;
+        background: #22c55e !important;
+    }
+    
+    .fuel-table td {
+        padding: 6px 4px;
+        page-break-inside: avoid;
+    }
+    
+    .fuel-table tr {
+        page-break-inside: avoid;
+    }
+    
+    /* åº—èˆ—æƒ…å ± */
+    .store-name {
+        font-size: 11px;
+    }
+    
+    .update-date {
+        font-size: 10px;
+    }
+    
+    /* ç‡ƒæ–™ä¾¡æ ¼ */
+    .fuel-price {
+        font-size: 12px;
+        padding: 4px 8px;
+        min-width: 60px;
+    }
+    
+    /* ã‚¬ã‚½ãƒªãƒ³ã‚¹ã‚¿ãƒ³ãƒ‰æƒ…å ± */
+    .station-name {
+        font-size: 11px;
+    }
+    
+    .station-address {
+        font-size: 10px;
+    }
+    
+    /* A4ã‚µã‚¤ã‚ºã«æœ€é©åŒ– */
+    @page {
+        size: A4 portrait;
+        margin: 10mm;
+    }
+    
+    /* ãƒ­ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ãƒ»ã‚¨ãƒ©ãƒ¼ã‚’éè¡¨ç¤º */
+    .loading,
+    .error {
+        display: none !important;
+    }
 }
