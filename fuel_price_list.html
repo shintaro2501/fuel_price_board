@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> <!-- ✅ 文字コードをUTF-8に明示 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>トヨタレンタリース広島 燃料単価一覧</title>
     <link rel="stylesheet" href="style_fuel_prices.css">
 </head>
 <body>
+    <!-- 上部コントロールバー -->
     <div class="app-controls">
         <div class="print-area">
             <span class="print-settings">印刷設定：A4・実際のサイズ・ヘッダーフッターなし</span>
@@ -16,14 +17,17 @@
         </div>
     </div>
 
+    <!-- ページヘッダー -->
     <div class="app-header">
         <div class="app-title-text">トヨタレンタリース広島 燃料単価一覧</div>
-        <p class="app-subtitle">各店舗の燃料単価と採用元ガソリンスタンド情報</p>
+        <div class="app-subtitle">各店舗の燃料単価と採用元ガソリンスタンド情報</div>
     </div>
 
+    <!-- ローディング・エラー表示 -->
     <div id="loading" class="loading">データを読み込み中...</div>
     <div id="error" class="error" style="display: none;">データの読み込みに失敗しました</div>
 
+    <!-- テーブル -->
     <div id="tableContainer" class="table-wrapper" style="display: none;">
         <div class="price-note">燃料単価は税込価格です</div>
         <div class="table-container">
