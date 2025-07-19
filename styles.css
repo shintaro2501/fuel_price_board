@@ -538,7 +538,7 @@ body {
     .location-map {
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
-        height: 250px !important; /* 印刷時の地図の高さ */
+        height: 300px !important; /* 印刷時の地図の高さ */
         page-break-inside: avoid;
     }
     
