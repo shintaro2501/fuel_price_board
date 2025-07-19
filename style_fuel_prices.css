@@ -49,9 +49,8 @@ body {
    ============================ */
 .app-header {
 	text-align: center;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	padding-top: 12px;
-	padding-bottom: 6px;
 	background: white;
 	border: 3px solid #22c55e; /* 緑色のフチ */
 	border-radius: 8px;
@@ -69,7 +68,7 @@ body {
 	-webkit-text-fill-color: transparent;
 	padding-right: 0;
 	padding-left: 0;         /* タイトル文字上下のパディング */
-	margin-top: 10px;
+	margin-top: 7px;
 	margin-right: 0;
 	margin-left: 0;          /* 上下マージン */
 	display: inline-block;   /* 背景グラデーション用 */
@@ -78,18 +77,17 @@ body {
 
 /* サブタイトル（divベース） */
 .app-subtitle {
-    font-size: 18px;
-    color: #6b7280;          /* サブタイトル文字色 */
-    margin-top: 10px;        /* タイトルとの間の余白 */
-    margin-bottom: 20px;     /* サブタイトル下の余白 */
-    line-height: 1.4;
+	font-size: 18px;
+	color: #6b7280;        /* タイトルとの間の余白 */
+	margin-bottom: 15px;     /* サブタイトル下の余白 */
+	line-height: 1.4;
 }
 
 .price-note {
-    text-align: right; /* ?? 右寄せ */
-    font-size: 14px;
-    color: #6b7280; /* 薄いグレーで落ち着いた色合い */
-    margin-bottom: 10px; /* テーブルとの間に少し余白 */
+	text-align: right; /* ?? 右寄せ */
+	font-size: 14px;
+	color: #6b7280; /* 薄いグレーで落ち着いた色合い */
+	margin-bottom: 2px; /* テーブルとの間に少し余白 */
 }
 
 /* ============================
@@ -123,9 +121,9 @@ body {
 }
 
 .fuel-table td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #e5e7eb;
+	padding: 8px;
+	text-align: center;
+	border-bottom: 1px solid #e5e7eb;
 }
 
 .fuel-table tr:last-child td {
@@ -187,4 +185,6 @@ body {
     text-align: center;
     color: #dc2626;
     font-weight: bold;
+}
+.table-container .fuel-table #tableBody {
 }
