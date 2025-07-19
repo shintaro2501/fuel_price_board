@@ -1,0 +1,143 @@
+/* ============================
+   ページ全体の基本設定
+   ============================ */
+body {
+    font-family: 'Meiryo', 'MS Gothic', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f5f5f5; /* ページ全体の背景色 */
+    line-height: 1.6;
+}
+
+/* ============================
+   上部コントロールバー
+   ============================ */
+.app-controls {
+    display: flex;
+    justify-content: flex-end; /* 印刷設定・ボタンを右寄せ */
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: white; /* バーの背景 */
+    border-radius: 8px; /* 角丸 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 軽い影 */
+}
+
+.print-settings {
+    font-size: 13px;
+    color: #6b7280; /* 説明文の文字色 */
+    font-weight: 500;
+}
+
+.print-button {
+    background: #007bff; /* ボタンの背景色 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.print-button:hover {
+    background: #0056b3; /* ホバー時の色 */
+}
+
+/* ============================
+   ページヘッダー
+   ============================ */
+.app-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 12px 15px;
+    background: white;
+    border: 3px solid #22c55e; /* 緑色のフチ */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* タイトル文字（divベース） */
+.app-title-text {
+    font-size: 48px;         /* タイトル文字サイズ */
+    font-weight: bold;
+    color: #1f2937;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 15px 0;         /* タイトル文字上下の余白 */
+    margin: 0;               /* デフォルト余白をリセット */
+    display: inline-block;   /* 背景グラデーション用 */
+}
+
+/* サブタイトル（divベース） */
+.app-subtitle {
+    font-size: 18px;
+    color: #6b7280;          /* サブタイトル文字色 */
+    margin-top: 10px;        /* タイトルとの間の余白 */
+    margin-bottom: 20px;     /* サブタイトル下の余白 */
+    line-height: 1.4;
+}
+
+/* ============================
+   テーブル設定
+   ============================ */
+.fuel-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.fuel-table thead {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); /* ヘッダー行の背景色 */
+}
+
+.fuel-table th {
+    color: white; /* ヘッダー文字色 */
+    padding: 15px 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.fuel-table td {
+    padding: 18px 12px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb; /* セルのボーダー */
+    vertical-align: middle;
+}
+
+.fuel-price.regular {
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%); /* レギュラー価格背景 */
+    color: white;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.fuel-price.diesel {
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%); /* 軽油価格背景 */
+    color: white;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+/* ============================
+   ローディング・エラーメッセージ
+   ============================ */
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.error {
+    background: #fee2e2;
+    border: 2px solid #f87171;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    color: #dc2626;
+    font-weight: bold;
+}

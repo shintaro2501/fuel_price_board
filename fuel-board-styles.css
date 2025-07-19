@@ -89,13 +89,15 @@ body {
    メインボード
    =================================================== */
 .fuel-board {
-    background: white;
-    border: 3px solid #f59e0b;
-    border-radius: 8px;
-    padding: 20px 25px 10px 25px;
-    max-width: 800px;
-    margin: 0 auto;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+	background: white;
+	border: 3px solid #f59e0b;
+	border-radius: 8px;
+	padding-top: 18px;
+	padding-right: 25px;
+	padding-left: 25px;
+	max-width: 800px;
+	margin: 0 auto;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 /* ===================================================
@@ -121,17 +123,17 @@ body {
 }
 
 .customer-greeting {
-    font-size: 16px;
-    color: #374151;
-    margin-bottom: 5px; /* ↓ 「ご利用のお客様へ」の下の余白 */
+	font-size: 16px;
+	color: #374151;
+	margin-bottom: 3px; /* ↓ 「ご利用のお客様へ」の下の余白 */
 }
 
 .company-name {
-    font-size: 16px;
-    font-weight: bold;
-    color: #1f2937;
-    margin-bottom: 5px;
-    white-space: nowrap;
+	font-size: 16px;
+	font-weight: bold;
+	color: #1f2937;
+	margin-bottom: 3px;
+	white-space: nowrap;
 }
 
 .store-name {
@@ -144,18 +146,21 @@ body {
    黄色い案内ボックス
    =================================================== */
 .notice-box {
-    background: #fef3c7;
-    border: 2px solid #f59e0b;
-    border-radius: 8px;
-    padding: 15px 20px;
-    margin-bottom: 20px; /* ↓ 黄色いボックスと「ガソリン代の精算は...」の間隔 */
-    text-align: center;
+	background: #fef3c7;
+	border: 2px solid #f59e0b;
+	border-radius: 8px;
+	padding-top: 15px;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-bottom: 7px;
+	margin-bottom: 20px; /* ↓ 黄色いボックスと「ガソリン代の精算は...」の間隔 */
+	text-align: center;
 }
 
 .notice-small {
-    font-size: 16px;
-    color: #374151;
-    margin-bottom: 8px; /* ↓ 小さいテキストと大きいテキストの間隔 */
+	font-size: 16px;
+	color: #374151;
+	margin-bottom: 3px; /* ↓ 小さいテキストと大きいテキストの間隔 */
 }
 
 .notice-large {
@@ -177,23 +182,23 @@ body {
    セクションタイトル（共通）
    =================================================== */
 .section-subtitle {
-    font-size: 16px;
-    font-weight: bold;
-    color: #1f2937;
-    margin-top: 10px;    /* ↑ 上の要素からの間隔 */
-    margin-bottom: 0px;  /* ↓ 下の要素との間隔（price-headerでは個別設定） */
+	font-size: 16px;
+	font-weight: bold;
+	color: #1f2937;
+	margin-top: 8px;    /* ↑ 上の要素からの間隔 */
+	margin-bottom: 0px;  /* ↓ 下の要素との間隔（price-headerでは個別設定） */
 }
 
 /* ===================================================
    燃費精算説明部分
    =================================================== */
 .fuel-explanation {
-    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-    border: 2px solid #3b82f6;
-    border-radius: 8px;
-    padding: 15px 15px 5px 15px;
-    margin-bottom: 15px; /* ↓ 説明ボックスと価格セクションの間隔 */
-    margin-top: 8px;     /* ↑ 「ガソリン代の精算は...」からの間隔 */
+	background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+	border: 2px solid #3b82f6;
+	border-radius: 8px;
+	padding: 15px 15px 5px 15px;
+	margin-bottom: 13px; /* ↓ 説明ボックスと価格セクションの間隔 */
+	margin-top: 7px;     /* ↑ 「ガソリン代の精算は...」からの間隔 */
 }
 
 .fuel-explanation-title {
@@ -207,10 +212,11 @@ body {
 }
 
 .fuel-explanation-text {
-    font-size: 14px;
-    color: #1f2937;
-    line-height: 1.6;
-    margin-bottom: 10px;
+	font-size: 14px;
+	color: #1f2937;
+	line-height: 1.6;
+	margin-bottom: 10px;
+	padding-top: 0px;
 }
 
 /* ===================================================
@@ -225,15 +231,14 @@ body {
 }
 
 .calculation-formula {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #1f2937;
-    margin-bottom: 15px; /* ↓ 計算式と注意書きの間隔 */
-    flex-wrap: wrap;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #1f2937; /* ↓ 計算式と注意書きの間隔 */
+	flex-wrap: wrap;
 }
 
 .formula-item {
@@ -247,6 +252,10 @@ body {
 .formula-item.highlight {
     background: #dbeafe;
     border: 1px solid #3b82f6;
+}
+.formula-item.highlight2 {
+	background: #f3f4f6;
+	border: 1px solid #1f2937;
 }
 
 .formula-top {
@@ -267,18 +276,18 @@ body {
 }
 
 .warning-notes {
-    margin-top: 20px;    /* ↑ 計算式からの間隔 */
-    margin-bottom: 0px;
-    margin-left: 20px;
+	margin-top: 18px;    /* ↑ 計算式からの間隔 */
+	margin-bottom: 0px;
+	margin-left: 25px;
 }
 
 .warning-note {
-    font-size: 14px;
-    color: #374151;
-    margin-bottom: 3px;  /* ↓ 注意書き同士の間隔 */
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
+	font-size: 14px;
+	color: #374151;
+	margin-bottom: 2px;  /* ↓ 注意書き同士の間隔 */
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
 }
 
 .warning-note:last-child {
@@ -295,12 +304,12 @@ body {
    価格表示部分
    =================================================== */
 .price-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 8px; /* ↓ 「当店の燃料単価は...」と価格ボックスの間隔 */
-    flex-wrap: wrap;
-    gap: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	margin-bottom: 7px; /* ↓ 「当店の燃料単価は...」と価格ボックスの間隔 */
+	flex-wrap: wrap;
+	gap: 10px;
 }
 
 .update-info {
@@ -318,15 +327,18 @@ body {
 }
 
 .fuel-type {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    padding: 15px 20px;
-    border-radius: 8px;
-    border: 2px solid #ddd;
-    color: white;
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+	padding-top: 10px;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-bottom: 5px;
+	border-radius: 8px;
+	border: 2px solid #ddd;
+	color: white;
 }
 
 .fuel-type.regular {
@@ -338,8 +350,9 @@ body {
 }
 
 .fuel-label {
-    font-size: 24px;
-    font-weight: bold;
+	font-size: 24px;
+	font-weight: bold;
+	padding-top: 0px;
 }
 
 .fuel-price {
@@ -359,20 +372,24 @@ body {
    参照ガソリンスタンド部分
    =================================================== */
 .reference-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #1f2937;
-    margin-bottom: 8px; /* ↓ 「現在、下記ガソリンスタンド...」と灰色ボックスの間隔 */
-    word-wrap: break-word;
+	font-size: 16px;
+	font-weight: bold;
+	color: #1f2937;
+	margin-bottom: 8px; /* ↓ 「現在、下記ガソリンスタンド...」と灰色ボックスの間隔 */
+	word-wrap: break-word;
+	margin-top: -5px;
 }
 
 .reference-section {
-    background: #f9fafb;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 15px 20px 10px 20px;
-    margin-bottom: 20px; /* ↓ 参照セクション全体の下マージン */
-    position: relative;
+	background: #f9fafb;
+	border: 2px solid #e5e7eb;
+	border-radius: 8px;
+	padding-top: 13px;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-bottom: 10px;
+	margin-bottom: 20px; /* ↓ 参照セクション全体の下マージン */
+	position: relative;
 }
 
 .reference-update-date {
@@ -405,14 +422,17 @@ body {
 }
 
 .station-distance {
-    background: #3b82f6;
-    color: white;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: bold;
-    white-space: nowrap;
-    flex-shrink: 0;
+	background: #3b82f6;
+	color: white;
+	padding-top: 4px;
+	padding-right: 12px;
+	padding-left: 12px;
+	border-radius: 12px;
+	font-size: 12px;
+	font-weight: bold;
+	white-space: nowrap;
+	flex-shrink: 0;
+	padding-bottom: 4px;
 }
 
 /* ===================================================
@@ -532,7 +552,7 @@ body {
     .location-map {
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
-        height: 250px !important; /* 印刷時の地図の高さ */
+        height: 300px !important; /* 印刷時の地図の高さ */
         page-break-inside: avoid;
     }
     
@@ -565,7 +585,8 @@ body {
     
     /* フォントサイズの微調整 */
     .notice-large {
-        font-size: 28px;
+	font-size: 28px;
+	margin-bottom: 0px;
     }
     
     .fuel-price {
@@ -580,4 +601,6 @@ body {
     .reference-section {
         page-break-inside: avoid;
     }
+}
+.highlight2 {
 }
