@@ -48,28 +48,32 @@ body {
    ページヘッダー
    ============================ */
 .app-header {
-    text-align: center;
-    margin-bottom: 30px;
-    padding: 12px 15px;
-    background: white;
-    border: 3px solid #22c55e; /* 緑色のフチ */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    overflow: hidden; /* margin collapse防止 */
+	text-align: center;
+	margin-bottom: 20px;
+	padding-top: 12px;
+	padding-bottom: 6px;
+	background: white;
+	border: 3px solid #22c55e; /* 緑色のフチ */
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	overflow: hidden; /* margin collapse防止 */
 }
 
 /* タイトル文字（divベース） */
 .app-title-text {
-    font-size: 48px;         /* タイトル文字サイズ */
-    font-weight: bold;
-    color: #1f2937;
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    padding: 15px 0;         /* タイトル文字上下のパディング */
-    margin: 20px 0;          /* 上下マージン */
-    display: inline-block;   /* 背景グラデーション用 */
-    line-height: 1.2;
+	font-size: 48px;         /* タイトル文字サイズ */
+	font-weight: bold;
+	color: #1f2937;
+	background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	padding-right: 0;
+	padding-left: 0;         /* タイトル文字上下のパディング */
+	margin-top: 10px;
+	margin-right: 0;
+	margin-left: 0;          /* 上下マージン */
+	display: inline-block;   /* 背景グラデーション用 */
+	line-height: 1.2;
 }
 
 /* サブタイトル（divベース） */
@@ -79,6 +83,13 @@ body {
     margin-top: 10px;        /* タイトルとの間の余白 */
     margin-bottom: 20px;     /* サブタイトル下の余白 */
     line-height: 1.4;
+}
+
+.price-note {
+    text-align: right; /* ?? 右寄せ */
+    font-size: 14px;
+    color: #6b7280; /* 薄いグレーで落ち着いた色合い */
+    margin-bottom: 10px; /* テーブルとの間に少し余白 */
 }
 
 /* ============================
