@@ -180,11 +180,11 @@ body {
    セクションタイトル（共通）
    =================================================== */
 .section-subtitle {
-    font-size: 16px;
-    font-weight: bold;
-    color: #1f2937;
-    margin-top: 10px;    /* ↑ 上の要素からの間隔 */
-    margin-bottom: 0px;  /* ↓ 下の要素との間隔（price-headerでは個別設定） */
+	font-size: 16px;
+	font-weight: bold;
+	color: #1f2937;
+	margin-top: 8px;    /* ↑ 上の要素からの間隔 */
+	margin-bottom: 0px;  /* ↓ 下の要素との間隔（price-headerでは個別設定） */
 }
 
 /* ===================================================
@@ -250,6 +250,10 @@ body {
 .formula-item.highlight {
     background: #dbeafe;
     border: 1px solid #3b82f6;
+}
+.formula-item.highlight2 {
+	background: #f3f4f6;
+	border: 1px solid #1f2937;
 }
 
 .formula-top {
@@ -538,7 +542,7 @@ body {
     .location-map {
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
-        height: 280px !important; /* 印刷時の地図の高さ */
+        height: 300px !important; /* 印刷時の地図の高さ */
         page-break-inside: avoid;
     }
     
@@ -587,4 +591,6 @@ body {
     .reference-section {
         page-break-inside: avoid;
     }
+}
+.highlight2 {
 }
