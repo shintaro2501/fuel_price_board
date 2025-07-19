@@ -171,8 +171,8 @@
                 select.appendChild(option);
             });
             
-            // デフォルトで福山駅前店を選択
-            const fukuyamaIndex = storesData.findIndex(store => store['店舗名'].includes('福山駅前店'));
+            // デフォルトの選択
+            const fukuyamaIndex = storesData.findIndex(store => store['店舗名'].includes('店舗を選択してください'));
             if (fukuyamaIndex !== -1) {
                 select.value = fukuyamaIndex;
                 updateStoreDisplay(fukuyamaIndex);
