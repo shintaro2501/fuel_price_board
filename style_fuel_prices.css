@@ -5,7 +5,7 @@ body {
     font-family: 'Meiryo', 'MS Gothic', sans-serif;
     margin: 0;
     padding: 20px;
-    background: #f5f5f5; /* ページ全体の背景色 */
+    background: #f5f5f5;
     line-height: 1.6;
 }
 
@@ -14,23 +14,29 @@ body {
    ============================ */
 .app-controls {
     display: flex;
-    justify-content: flex-end; /* 印刷設定・ボタンを右寄せ */
+    justify-content: flex-end;
     align-items: center;
     margin-bottom: 15px;
     padding: 10px;
-    background: white; /* バーの背景 */
-    border-radius: 8px; /* 角丸 */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 軽い影 */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.print-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .print-settings {
     font-size: 13px;
-    color: #6b7280; /* 説明文の文字色 */
+    color: #6b7280;
     font-weight: 500;
 }
 
 .print-button {
-    background: #007bff; /* ボタンの背景色 */
+    background: #007bff;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -41,53 +47,64 @@ body {
 }
 
 .print-button:hover {
-    background: #0056b3; /* ホバー時の色 */
+    background: #0056b3;
 }
 
 /* ============================
    ページヘッダー
    ============================ */
 .app-header {
-	text-align: center;
-	margin-bottom: 10px;
-	padding-top: 12px;
-	background: white;
-	border: 3px solid #22c55e; /* 緑色のフチ */
-	border-radius: 8px;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-	overflow: hidden; /* margin collapse防止 */
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 20px;
+    background: white;
+    border: 3px solid #22c55e;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* タイトル文字（divベース） */
+/* タイトル文字 */
 .app-title-text {
-	font-size: 48px;         /* タイトル文字サイズ */
-	font-weight: bold;
-	color: #1f2937;
-	background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	padding-right: 0;
-	padding-left: 0;         /* タイトル文字上下のパディング */
-	margin-top: 7px;
-	margin-right: 0;
-	margin-left: 0;          /* 上下マージン */
-	display: inline-block;   /* 背景グラデーション用 */
-	line-height: 1.2;
+    font-size: 48px;
+    font-weight: bold;
+    color: #1f2937;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    padding: 10px 0 5px 0;
+    line-height: 1.2;
 }
 
-/* サブタイトル（divベース） */
+/* サブタイトル */
 .app-subtitle {
-	font-size: 18px;
-	color: #6b7280;        /* タイトルとの間の余白 */
-	margin-bottom: 15px;     /* サブタイトル下の余白 */
-	line-height: 1.4;
+    font-size: 18px;
+    color: #6b7280;
+    margin: 5px 0 0 0;
+    line-height: 1.4;
 }
 
+/* 価格注記 */
 .price-note {
-	text-align: right; /* ?? 右寄せ */
-	font-size: 14px;
-	color: #6b7280; /* 薄いグレーで落ち着いた色合い */
-	margin-bottom: 2px; /* テーブルとの間に少し余白 */
+    text-align: right;
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 5px;
+}
+
+/* ============================
+   テーブルコンテナ
+   ============================ */
+.table-wrapper {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.table-container {
+    overflow-x: auto;
 }
 
 /* ============================
@@ -98,8 +115,8 @@ body {
     border-collapse: collapse;
     font-size: 14px;
     background: #ffffff;
+    border: 2px solid #22c55e;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     overflow: hidden;
 }
 
@@ -114,6 +131,7 @@ body {
     font-weight: bold;
     font-size: 16px;
     border-right: 2px solid rgba(255, 255, 255, 0.3);
+    white-space: nowrap;
 }
 
 .fuel-table th:last-child {
@@ -121,9 +139,9 @@ body {
 }
 
 .fuel-table td {
-	padding: 0;
-	text-align: center;
-	border-bottom: 1px solid #e5e7eb;
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .fuel-table tr:last-child td {
@@ -149,26 +167,43 @@ body {
 }
 
 .fuel-price.regular {
-    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%); /* レギュラー: 赤系グラデーション */
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
 }
 
 .fuel-price.diesel {
-    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%); /* 軽油: 緑系グラデーション */
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
 }
 
 /* ============================
-   店舗名・ガソリンスタンド名を太字
+   店舗名・ガソリンスタンド名
    ============================ */
+.store-info {
+    text-align: center;
+}
+
 .store-name {
     font-weight: bold;
+    font-size: 14px;
+}
+
+.update-date {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.station-info {
+    text-align: center;
 }
 
 .station-name {
     font-weight: bold;
+    font-size: 14px;
 }
 
 .station-address {
-    font-size: 13px; /* ?? 元より1ポイント小さく */
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 2px;
 }
 
 /* ============================
@@ -189,203 +224,124 @@ body {
     text-align: center;
     color: #dc2626;
     font-weight: bold;
-}
-.table-container .fuel-table #tableBody {
-}
-
-/* ============================
-   ページ全体の基本設定
-   ============================ */
-body {
-    font-family: 'Meiryo', 'MS Gothic', sans-serif;
-    margin: 0;
-    padding: 20px;
-    background: #f5f5f5; /* ページ全体の背景色 */
-    line-height: 1.6;
+    margin: 20px;
 }
 
 /* ============================
-   上部コントロールバー
+   印刷用スタイル
    ============================ */
-.app-controls {
-    display: flex;
-    justify-content: flex-end; /* 印刷設定・ボタンを右寄せ */
-    align-items: center;
-    margin-bottom: 15px;
-    padding: 10px;
-    background: white; /* バーの背景 */
-    border-radius: 8px; /* 角丸 */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 軽い影 */
-}
-
-.print-settings {
-    font-size: 13px;
-    color: #6b7280; /* 説明文の文字色 */
-    font-weight: 500;
-}
-
-.print-button {
-    background: #007bff; /* ボタンの背景色 */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.print-button:hover {
-    background: #0056b3; /* ホバー時の色 */
-}
-
-/* ============================
-   ページヘッダー
-   ============================ */
-.app-header {
-	text-align: center;
-	margin-bottom: 10px;
-	padding-top: 12px;
-	background: white;
-	border: 3px solid #22c55e; /* 緑色のフチ */
-	border-radius: 8px;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-	overflow: hidden; /* margin collapse防止 */
-}
-
-/* タイトル文字（divベース） */
-.app-title-text {
-	font-size: 48px;         /* タイトル文字サイズ */
-	font-weight: bold;
-	color: #1f2937;
-	background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	padding-right: 0;
-	padding-left: 0;         /* タイトル文字上下のパディング */
-	margin-top: 7px;
-	margin-right: 0;
-	margin-left: 0;          /* 上下マージン */
-	display: inline-block;   /* 背景グラデーション用 */
-	line-height: 1.2;
-}
-
-/* サブタイトル（divベース） */
-.app-subtitle {
-	font-size: 18px;
-	color: #6b7280;        /* タイトルとの間の余白 */
-	margin-bottom: 15px;     /* サブタイトル下の余白 */
-	line-height: 1.4;
-}
-
-.price-note {
-	text-align: right; /* ?? 右寄せ */
-	font-size: 14px;
-	color: #6b7280; /* 薄いグレーで落ち着いた色合い */
-	margin-bottom: 2px; /* テーブルとの間に少し余白 */
-}
-
-/* ============================
-   テーブル全体の装飾
-   ============================ */
-.fuel-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    overflow: hidden;
-}
-
-.fuel-table thead {
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-    color: white;
-}
-
-.fuel-table th {
-	padding-top: 15px;
-	padding-right: 10px;
-	padding-left: 10px;
-	padding-bottom: 15px;
-	text-align: center;
-	font-weight: bold;
-	font-size: 16px;
-	border-right: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.fuel-table th:last-child {
-    border-right: none;
-}
-
-.fuel-table td {
-	padding-top: 18px;
-	padding-right: 8px;
-	padding-left: 8px;
-	padding-bottom: 18px;
-	text-align: center;
-	border-bottom: 1px solid #e5e7eb;
-}
-
-.fuel-table tr:last-child td {
-    border-bottom: none;
-}
-
-.fuel-table tbody tr:hover {
-    background-color: #f9fafb;
-}
-
-/* ============================
-   レギュラー単価・軽油単価の装飾
-   ============================ */
-.fuel-price {
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
-    display: inline-block;
-    min-width: 80px;
-    text-align: center;
-}
-
-.fuel-price.regular {
-    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%); /* レギュラー: 赤系グラデーション */
-}
-
-.fuel-price.diesel {
-    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%); /* 軽油: 緑系グラデーション */
-}
-
-/* ============================
-   店舗名・ガソリンスタンド名を太字
-   ============================ */
-.store-name {
-    font-weight: bold;
-}
-
-.station-name {
-    font-weight: bold;
-}
-
-/* ============================
-   ローディング・エラーメッセージ
-   ============================ */
-.loading {
-    text-align: center;
-    padding: 40px;
-    color: #6b7280;
-    font-size: 16px;
-}
-
-.error {
-    background: #fee2e2;
-    border: 2px solid #f87171;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    color: #dc2626;
-    font-weight: bold;
-}
-.table-container .fuel-table #tableBody {
+@media print {
+    * {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    body {
+        background: white;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* コントロールバーを非表示 */
+    .app-controls {
+        display: none !important;
+    }
+    
+    /* ページヘッダーの調整 */
+    .app-header {
+        margin: 0 0 10px 0;
+        padding: 15px;
+        border: 2px solid #22c55e;
+        page-break-inside: avoid;
+    }
+    
+    .app-title-text {
+        font-size: 32px;
+        padding: 5px 0;
+    }
+    
+    .app-subtitle {
+        font-size: 14px;
+        margin: 5px 0 0 0;
+    }
+    
+    /* 価格注記 */
+    .price-note {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+    
+    /* テーブルラッパー */
+    .table-wrapper {
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* テーブルの調整 */
+    .fuel-table {
+        font-size: 11px;
+        width: 100%;
+        page-break-inside: auto;
+    }
+    
+    .fuel-table thead {
+        display: table-header-group;
+    }
+    
+    .fuel-table tbody {
+        display: table-row-group;
+    }
+    
+    .fuel-table th {
+        padding: 8px 6px;
+        font-size: 12px;
+        background: #22c55e !important;
+    }
+    
+    .fuel-table td {
+        padding: 6px 4px;
+        page-break-inside: avoid;
+    }
+    
+    .fuel-table tr {
+        page-break-inside: avoid;
+    }
+    
+    /* 店舗情報 */
+    .store-name {
+        font-size: 11px;
+    }
+    
+    .update-date {
+        font-size: 10px;
+    }
+    
+    /* 燃料価格 */
+    .fuel-price {
+        font-size: 12px;
+        padding: 4px 8px;
+        min-width: 60px;
+    }
+    
+    /* ガソリンスタンド情報 */
+    .station-name {
+        font-size: 11px;
+    }
+    
+    .station-address {
+        font-size: 10px;
+    }
+    
+    /* A4サイズに最適化 */
+    @page {
+        size: A4 portrait;
+        margin: 10mm;
+    }
+    
+    /* ローディング・エラーを非表示 */
+    .loading,
+    .error {
+        display: none !important;
+    }
 }
