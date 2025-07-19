@@ -1,36 +1,36 @@
 /* ============================
-   ƒy[ƒW‘S‘Ì‚ÌŠî–{İ’è
+   ãƒšãƒ¼ã‚¸å…¨ä½“ã®åŸºæœ¬è¨­å®š
    ============================ */
 body {
     font-family: 'Meiryo', 'MS Gothic', sans-serif;
     margin: 0;
     padding: 20px;
-    background: #f5f5f5; /* ƒy[ƒW‘S‘Ì‚Ì”wŒiF */
+    background: #f5f5f5; /* ãƒšãƒ¼ã‚¸å…¨ä½“ã®èƒŒæ™¯è‰² */
     line-height: 1.6;
 }
 
 /* ============================
-   ã•”ƒRƒ“ƒgƒ[ƒ‹ƒo[
+   ä¸Šéƒ¨ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãƒãƒ¼
    ============================ */
 .app-controls {
     display: flex;
-    justify-content: flex-end; /* ˆóüİ’èEƒ{ƒ^ƒ“‚ğ‰EŠñ‚¹ */
+    justify-content: flex-end; /* å°åˆ·è¨­å®šãƒ»ãƒœã‚¿ãƒ³ã‚’å³å¯„ã› */
     align-items: center;
     margin-bottom: 15px;
     padding: 10px;
-    background: white; /* ƒo[‚Ì”wŒi */
-    border-radius: 8px; /* ŠpŠÛ */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Œy‚¢‰e */
+    background: white; /* ãƒãƒ¼ã®èƒŒæ™¯ */
+    border-radius: 8px; /* è§’ä¸¸ */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* è»½ã„å½± */
 }
 
 .print-settings {
     font-size: 13px;
-    color: #6b7280; /* à–¾•¶‚Ì•¶šF */
+    color: #6b7280; /* èª¬æ˜æ–‡ã®æ–‡å­—è‰² */
     font-weight: 500;
 }
 
 .print-button {
-    background: #007bff; /* ƒ{ƒ^ƒ“‚Ì”wŒiF */
+    background: #007bff; /* ãƒœã‚¿ãƒ³ã®èƒŒæ™¯è‰² */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -41,57 +41,57 @@ body {
 }
 
 .print-button:hover {
-    background: #0056b3; /* ƒzƒo[‚ÌF */
+    background: #0056b3; /* ãƒ›ãƒãƒ¼æ™‚ã®è‰² */
 }
 
 /* ============================
-   ƒy[ƒWƒwƒbƒ_[
+   ãƒšãƒ¼ã‚¸ãƒ˜ãƒƒãƒ€ãƒ¼
    ============================ */
 .app-header {
 	text-align: center;
 	margin-bottom: 10px;
 	padding-top: 12px;
 	background: white;
-	border: 3px solid #22c55e; /* —ÎF‚Ìƒtƒ` */
+	border: 3px solid #22c55e; /* ç·‘è‰²ã®ãƒ•ãƒ */
 	border-radius: 8px;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-	overflow: hidden; /* margin collapse–h~ */
+	overflow: hidden; /* margin collapseé˜²æ­¢ */
 }
 
-/* ƒ^ƒCƒgƒ‹•¶šidivƒx[ƒXj */
+/* ã‚¿ã‚¤ãƒˆãƒ«æ–‡å­—ï¼ˆdivãƒ™ãƒ¼ã‚¹ï¼‰ */
 .app-title-text {
-	font-size: 48px;         /* ƒ^ƒCƒgƒ‹•¶šƒTƒCƒY */
+	font-size: 48px;         /* ã‚¿ã‚¤ãƒˆãƒ«æ–‡å­—ã‚µã‚¤ã‚º */
 	font-weight: bold;
 	color: #1f2937;
 	background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	padding-right: 0;
-	padding-left: 0;         /* ƒ^ƒCƒgƒ‹•¶šã‰º‚ÌƒpƒfƒBƒ“ƒO */
+	padding-left: 0;         /* ã‚¿ã‚¤ãƒˆãƒ«æ–‡å­—ä¸Šä¸‹ã®ãƒ‘ãƒ‡ã‚£ãƒ³ã‚° */
 	margin-top: 7px;
 	margin-right: 0;
-	margin-left: 0;          /* ã‰ºƒ}[ƒWƒ“ */
-	display: inline-block;   /* ”wŒiƒOƒ‰ƒf[ƒVƒ‡ƒ“—p */
+	margin-left: 0;          /* ä¸Šä¸‹ãƒãƒ¼ã‚¸ãƒ³ */
+	display: inline-block;   /* èƒŒæ™¯ã‚°ãƒ©ãƒ‡ãƒ¼ã‚·ãƒ§ãƒ³ç”¨ */
 	line-height: 1.2;
 }
 
-/* ƒTƒuƒ^ƒCƒgƒ‹idivƒx[ƒXj */
+/* ã‚µãƒ–ã‚¿ã‚¤ãƒˆãƒ«ï¼ˆdivãƒ™ãƒ¼ã‚¹ï¼‰ */
 .app-subtitle {
 	font-size: 18px;
-	color: #6b7280;        /* ƒ^ƒCƒgƒ‹‚Æ‚ÌŠÔ‚Ì—]”’ */
-	margin-bottom: 15px;     /* ƒTƒuƒ^ƒCƒgƒ‹‰º‚Ì—]”’ */
+	color: #6b7280;        /* ã‚¿ã‚¤ãƒˆãƒ«ã¨ã®é–“ã®ä½™ç™½ */
+	margin-bottom: 15px;     /* ã‚µãƒ–ã‚¿ã‚¤ãƒˆãƒ«ä¸‹ã®ä½™ç™½ */
 	line-height: 1.4;
 }
 
 .price-note {
-	text-align: right; /* ?? ‰EŠñ‚¹ */
+	text-align: right; /* ?? å³å¯„ã› */
 	font-size: 14px;
-	color: #6b7280; /* ”–‚¢ƒOƒŒ[‚Å—‚¿’…‚¢‚½F‡‚¢ */
-	margin-bottom: 2px; /* ƒe[ƒuƒ‹‚Æ‚ÌŠÔ‚É­‚µ—]”’ */
+	color: #6b7280; /* è–„ã„ã‚°ãƒ¬ãƒ¼ã§è½ã¡ç€ã„ãŸè‰²åˆã„ */
+	margin-bottom: 2px; /* ãƒ†ãƒ¼ãƒ–ãƒ«ã¨ã®é–“ã«å°‘ã—ä½™ç™½ */
 }
 
 /* ============================
-   ƒe[ƒuƒ‹‘S‘Ì‚Ì‘•ü
+   ãƒ†ãƒ¼ãƒ–ãƒ«å…¨ä½“ã®è£…é£¾
    ============================ */
 .fuel-table {
     width: 100%;
@@ -135,7 +135,7 @@ body {
 }
 
 /* ============================
-   ƒŒƒMƒ…ƒ‰[’P‰¿EŒy–û’P‰¿‚Ì‘•ü
+   ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼å˜ä¾¡ãƒ»è»½æ²¹å˜ä¾¡ã®è£…é£¾
    ============================ */
 .fuel-price {
     font-size: 16px;
@@ -149,15 +149,15 @@ body {
 }
 
 .fuel-price.regular {
-    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%); /* ƒŒƒMƒ…ƒ‰[: ÔŒnƒOƒ‰ƒf[ƒVƒ‡ƒ“ */
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%); /* ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼: èµ¤ç³»ã‚°ãƒ©ãƒ‡ãƒ¼ã‚·ãƒ§ãƒ³ */
 }
 
 .fuel-price.diesel {
-    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%); /* Œy–û: —ÎŒnƒOƒ‰ƒf[ƒVƒ‡ƒ“ */
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%); /* è»½æ²¹: ç·‘ç³»ã‚°ãƒ©ãƒ‡ãƒ¼ã‚·ãƒ§ãƒ³ */
 }
 
 /* ============================
-   “X•Ü–¼EƒKƒ\ƒŠƒ“ƒXƒ^ƒ“ƒh–¼‚ğ‘¾š
+   åº—èˆ—åãƒ»ã‚¬ã‚½ãƒªãƒ³ã‚¹ã‚¿ãƒ³ãƒ‰åã‚’å¤ªå­—
    ============================ */
 .store-name {
     font-weight: bold;
@@ -167,8 +167,12 @@ body {
     font-weight: bold;
 }
 
+.station-address {
+    font-size: 13px; /* ğŸ†• å…ƒã‚ˆã‚Š1ãƒã‚¤ãƒ³ãƒˆå°ã•ã */
+}
+
 /* ============================
-   ƒ[ƒfƒBƒ“ƒOEƒGƒ‰[ƒƒbƒZ[ƒW
+   ãƒ­ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ãƒ»ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
    ============================ */
 .loading {
     text-align: center;
