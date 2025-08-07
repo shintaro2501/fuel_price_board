@@ -218,11 +218,11 @@
                 select.appendChild(option);
             });
             
-            // デフォルトの選択
-            const fukuyamaIndex = storesData.findIndex(store => store['店舗名'].includes('店舗を選択してください'));
-            if (fukuyamaIndex !== -1) {
-                select.value = fukuyamaIndex;
-                updateStoreDisplay(fukuyamaIndex);
+            // デフォルトの選択（修正）
+            if (storesData.length > 0) {
+                // 最初の店舗をデフォルトで選択
+                select.value = 0;
+                updateStoreDisplay(0);
             }
         }
         
@@ -247,7 +247,12 @@
         
         // 地図を座標情報で更新（住所・緯度経度両対応）
         function updateMapWithCoordinates(storeAddress, stationCoordinates, storeName, stationName) {
-            if (!map) return;
+            if (!map) {
+                console.error('地図が初期化されていません');
+                return;
+            }
+            
+            console.log('地図更新開始:', { storeAddress, stationCoordinates, storeName, stationName });
             
             try {
                 // ガソリンスタンドの座標を処理
@@ -257,13 +262,15 @@
                     const stationLatLng = convertDMSToDecimal(stationCoordinates);
                     if (!stationLatLng) {
                         console.error('ガソリンスタンドの座標変換に失敗しました:', stationCoordinates);
-                        document.getElementById('stationDistance').textContent = '座標変換エラー';
+                        document.getElementById('stationDistance').textContent = 'スタンド座標変換エラー';
                         return;
                     }
                     stationPosition = new google.maps.LatLng(stationLatLng.lat, stationLatLng.lng);
+                    console.log('スタンド位置（緯度経度）:', stationLatLng);
                 } else {
                     // 住所形式の場合
                     stationPosition = stationCoordinates;
+                    console.log('スタンド位置（住所）:', stationCoordinates);
                 }
                 
                 // 店舗の座標を処理
@@ -277,12 +284,15 @@
                         return;
                     }
                     storePosition = new google.maps.LatLng(storeLatLng.lat, storeLatLng.lng);
+                    console.log('店舗位置（緯度経度）:', storeLatLng);
                 } else {
                     // 住所形式の場合
                     storePosition = storeAddress;
+                    console.log('店舗位置（住所）:', storeAddress);
                 }
                 
                 // Directions Service でルートを計算
+                console.log('ルート計算開始...');
                 directionsService.route({
                     origin: storePosition,
                     destination: stationPosition,
@@ -290,6 +300,7 @@
                     avoidHighways: false,
                     avoidTolls: false
                 }, (response, status) => {
+                    console.log('ルート計算結果:', status);
                     if (status === 'OK') {
                         directionsRenderer.setDirections(response);
                         
@@ -309,9 +320,10 @@
                         // 読み込み完了
                         document.getElementById('mapLoading').style.display = 'none';
                         document.getElementById('map').style.display = 'block';
+                        console.log('地図表示完了');
                     } else {
                         console.error('Directions request failed due to ' + status);
-                        document.getElementById('stationDistance').textContent = 'ルート計算エラー';
+                        document.getElementById('stationDistance').textContent = 'ルート計算エラー: ' + status;
                         
                         // エラーの場合は座標から直接距離計算を試行
                         fallbackWithBothCoordinates(storePosition, stationPosition);
@@ -320,7 +332,7 @@
                 
             } catch (error) {
                 console.error('地図更新エラー:', error);
-                document.getElementById('stationDistance').textContent = '地図更新エラー';
+                document.getElementById('stationDistance').textContent = '地図更新エラー: ' + error.message;
             }
         }
         
