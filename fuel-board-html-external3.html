@@ -132,17 +132,28 @@
         let directionsService = null;
         let directionsRenderer = null;
         
-
+        // 文字列が緯度経度形式かどうかを判定する関数
+        function isCoordinateFormat(str) {
+            if (!str || typeof str !== 'string') return false;
+            // より厳密な正規表現で判定
+            const regex = /^\d+°\d+'[\d.]+"?[NSEW]\s+\d+°\d+'[\d.]+"?[NSEW]$/;
+            return regex.test(str.trim());
+        }
         
         // 度分秒形式の座標を十進数に変換する関数
         function convertDMSToDecimal(dmsString) {
             try {
+                // 文字列をクリーンアップ（余分な文字を除去）
+                const cleanString = dmsString.trim().replace(/[""]$/, ''); // 末尾の余分な引用符を除去
+                console.log('変換対象（クリーンアップ後）:', cleanString);
+                
                 // 例: "34°24'20.3"N 132°27'42.9"E" の形式を解析
                 const regex = /(\d+)°(\d+)'([\d.]+)"?([NSEW])\s+(\d+)°(\d+)'([\d.]+)"?([NSEW])/;
-                const match = dmsString.match(regex);
+                const match = cleanString.match(regex);
                 
                 if (!match) {
-                    throw new Error('座標形式が正しくありません');
+                    console.error('座標形式が正しくありません:', cleanString);
+                    return null;
                 }
                 
                 // 緯度の計算
@@ -161,6 +172,7 @@
                 let lng = lngDeg + (lngMin / 60) + (lngSec / 3600);
                 if (lngDir === 'W') lng = -lng;
                 
+                console.log('変換結果:', { lat: lat, lng: lng });
                 return { lat: lat, lng: lng };
             } catch (error) {
                 console.error('座標変換エラー:', error, 'Input:', dmsString);
