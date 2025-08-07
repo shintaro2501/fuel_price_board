@@ -132,66 +132,6 @@
         let directionsService = null;
         let directionsRenderer = null;
         
-        // 文字列が緯度経度形式かどうかを判定する関数
-        function isCoordinateFormat(str) {
-            if (!str || typeof str !== 'string') return false;
-            // 「広島県」が含まれていない場合は緯度経度とみなす
-            return !str.includes('広島県');
-        }
-        
-        // 度分秒形式の座標を十進数に変換する関数
-        function convertDMSToDecimal(dmsString) {
-            try {
-                // 文字列をクリーンアップ（余分な文字を除去）
-                const cleanString = dmsString.trim().replace(/[""]$/, ''); // 末尾の余分な引用符を除去
-                console.log('変換対象（クリーンアップ後）:', cleanString);
-                
-                // 例: "34°24'20.3"N 132°27'42.9"E" の形式を解析
-                const regex = /(\d+)°(\d+)'([\d.]+)"?([NSEW])\s+(\d+)°(\d+)'([\d.]+)"?([NSEW])/;
-                const match = cleanString.match(regex);
-                
-                if (!match) {
-                    console.error('座標形式が正しくありません:', cleanString);
-                    return null;
-                }
-                
-                // 緯度の計算
-                const latDeg = parseInt(match[1]);
-                const latMin = parseInt(match[2]);
-                const latSec = parseFloat(match[3]);
-                const latDir = match[4];
-                let lat = latDeg + (latMin / 60) + (latSec / 3600);
-                if (latDir === 'S') lat = -lat;
-                
-                // 経度の計算
-                const lngDeg = parseInt(match[5]);
-                const lngMin = parseInt(match[6]);
-                const lngSec = parseFloat(match[7]);
-                const lngDir = match[8];
-                let lng = lngDeg + (lngMin / 60) + (lngSec / 3600);
-                if (lngDir === 'W') lng = -lng;
-                
-                console.log('変換結果:', { lat: lat, lng: lng });
-                return { lat: lat, lng: lng };
-            } catch (error) {
-                console.error('座標変換エラー:', error, 'Input:', dmsString);
-                return null;
-            }
-        }
-        
-        // 2点間の距離を計算（ハバーサイン公式）
-        function calculateDistance(lat1, lng1, lat2, lng2) {
-            const R = 6371; // 地球の半径（km）
-            const dLat = (lat2 - lat1) * Math.PI / 180;
-            const dLng = (lng2 - lng1) * Math.PI / 180;
-            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                      Math.sin(dLng/2) * Math.sin(dLng/2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            const distance = R * c;
-            return distance;
-        }
-        
         // CSVファイルを読み込み
         async function loadStoresData() {
             try {
@@ -231,11 +171,11 @@
                 select.appendChild(option);
             });
             
-            // デフォルトの選択（修正）
-            if (storesData.length > 0) {
-                // 最初の店舗をデフォルトで選択
-                select.value = 0;
-                updateStoreDisplay(0);
+            // デフォルトの選択
+            const fukuyamaIndex = storesData.findIndex(store => store['店舗名'].includes('店舗を選択してください'));
+            if (fukuyamaIndex !== -1) {
+                select.value = fukuyamaIndex;
+                updateStoreDisplay(fukuyamaIndex);
             }
         }
         
@@ -254,167 +194,45 @@
             document.getElementById('legendStoreName').textContent = `トヨタレンタカー${store['店舗名']}`;
             document.getElementById('legendStationName').textContent = store['スタンド名'];
             
-            // 地図を更新（緯度経度を使用）
-            updateMapWithCoordinates(store['店舗住所'], store['緯度経度'], store['店舗名'], store['スタンド名']);
+            // 地図を更新
+            updateMap(store['店舗住所'], store['スタンド住所'], store['店舗名'], store['スタンド名']);
         }
         
-        // 地図を座標情報で更新（住所・緯度経度両対応）
-        function updateMapWithCoordinates(storeAddress, stationCoordinates, storeName, stationName) {
-            if (!map) {
-                console.error('地図が初期化されていません');
-                return;
-            }
+        // 地図を更新
+        function updateMap(storeAddress, stationAddress, storeName, stationName) {
+            if (!map) return;
             
-            console.log('地図更新開始:', { storeAddress, stationCoordinates, storeName, stationName });
-            
-            try {
-                // ガソリンスタンドの座標を処理
-                let stationPosition;
-                if (isCoordinateFormat(stationCoordinates)) {
-                    // 緯度経度形式の場合
-                    const stationLatLng = convertDMSToDecimal(stationCoordinates);
-                    if (!stationLatLng) {
-                        console.error('ガソリンスタンドの座標変換に失敗しました:', stationCoordinates);
-                        document.getElementById('stationDistance').textContent = 'スタンド座標変換エラー';
-                        return;
-                    }
-                    stationPosition = new google.maps.LatLng(stationLatLng.lat, stationLatLng.lng);
-                    console.log('スタンド位置（緯度経度）:', stationLatLng);
-                } else {
-                    // 住所形式の場合
-                    stationPosition = stationCoordinates;
-                    console.log('スタンド位置（住所）:', stationCoordinates);
-                }
-                
-                // 店舗の座標を処理
-                let storePosition;
-                if (isCoordinateFormat(storeAddress)) {
-                    // 緯度経度形式の場合
-                    const storeLatLng = convertDMSToDecimal(storeAddress);
-                    if (!storeLatLng) {
-                        console.error('店舗の座標変換に失敗しました:', storeAddress);
-                        document.getElementById('stationDistance').textContent = '店舗座標変換エラー';
-                        return;
-                    }
-                    storePosition = new google.maps.LatLng(storeLatLng.lat, storeLatLng.lng);
-                    console.log('店舗位置（緯度経度）:', storeLatLng);
-                } else {
-                    // 住所形式の場合
-                    storePosition = storeAddress;
-                    console.log('店舗位置（住所）:', storeAddress);
-                }
-                
-                // Directions Service でルートを計算
-                console.log('ルート計算開始...');
-                directionsService.route({
-                    origin: storePosition,
-                    destination: stationPosition,
-                    travelMode: google.maps.TravelMode.DRIVING,
-                    avoidHighways: false,
-                    avoidTolls: false
-                }, (response, status) => {
-                    console.log('ルート計算結果:', status);
-                    if (status === 'OK') {
-                        directionsRenderer.setDirections(response);
-                        
-                        // 距離情報を更新
-                        const route = response.routes[0];
-                        const leg = route.legs[0];
-                        const distance = leg.distance.text;
-                        
-                        document.getElementById('stationDistance').textContent = `当店から${distance}`;
-                        
-                        // カスタムマーカーの位置を設定
-                        if (window.startMarker && window.endMarker) {
-                            window.startMarker.setPosition(leg.start_location);
-                            window.endMarker.setPosition(leg.end_location);
-                        }
-                        
-                        // 読み込み完了
-                        document.getElementById('mapLoading').style.display = 'none';
-                        document.getElementById('map').style.display = 'block';
-                        console.log('地図表示完了');
-                    } else {
-                        console.error('Directions request failed due to ' + status);
-                        document.getElementById('stationDistance').textContent = 'ルート計算エラー: ' + status;
-                        
-                        // エラーの場合は座標から直接距離計算を試行
-                        fallbackWithBothCoordinates(storePosition, stationPosition);
-                    }
-                });
-                
-            } catch (error) {
-                console.error('地図更新エラー:', error);
-                document.getElementById('stationDistance').textContent = '地図更新エラー: ' + error.message;
-            }
-        }
-        
-        // フォールバック：両方の座標を処理して距離計算
-        function fallbackWithBothCoordinates(storePosition, stationPosition) {
-            const geocoder = new google.maps.Geocoder();
-            let storeLatLng = null;
-            let stationLatLng = null;
-            
-            // 店舗位置の処理
-            const processStorePosition = () => {
-                return new Promise((resolve) => {
-                    if (storePosition instanceof google.maps.LatLng) {
-                        storeLatLng = storePosition;
-                        resolve();
-                    } else {
-                        geocoder.geocode({ 'address': storePosition }, (results, status) => {
-                            if (status === 'OK') {
-                                storeLatLng = results[0].geometry.location;
-                            }
-                            resolve();
-                        });
-                    }
-                });
-            };
-            
-            // ガソリンスタンド位置の処理
-            const processStationPosition = () => {
-                return new Promise((resolve) => {
-                    if (stationPosition instanceof google.maps.LatLng) {
-                        stationLatLng = stationPosition;
-                        resolve();
-                    } else {
-                        geocoder.geocode({ 'address': stationPosition }, (results, status) => {
-                            if (status === 'OK') {
-                                stationLatLng = results[0].geometry.location;
-                            }
-                            resolve();
-                        });
-                    }
-                });
-            };
-            
-            // 両方の位置を処理してから距離計算
-            Promise.all([processStorePosition(), processStationPosition()]).then(() => {
-                if (storeLatLng && stationLatLng) {
-                    const distance = calculateDistance(
-                        storeLatLng.lat(), storeLatLng.lng(),
-                        stationLatLng.lat(), stationLatLng.lng()
-                    );
-                    document.getElementById('stationDistance').textContent = `当店から約${distance.toFixed(1)} km`;
+            // Directions Service でルートを計算
+            directionsService.route({
+                origin: storeAddress,
+                destination: stationAddress,
+                travelMode: google.maps.TravelMode.DRIVING,
+                avoidHighways: false,
+                avoidTolls: false
+            }, (response, status) => {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(response);
                     
-                    // マーカーを配置
+                    // 距離情報を更新
+                    const route = response.routes[0];
+                    const leg = route.legs[0];
+                    const distance = leg.distance.text;
+                    
+                    document.getElementById('stationDistance').textContent = `当店から${distance}`;
+                    
+                    // カスタムマーカーの位置を設定
                     if (window.startMarker && window.endMarker) {
-                        window.startMarker.setPosition(storeLatLng);
-                        window.endMarker.setPosition(stationLatLng);
+                        window.startMarker.setPosition(leg.start_location);
+                        window.endMarker.setPosition(leg.end_location);
                     }
                     
-                    // 地図の表示範囲を調整
-                    const bounds = new google.maps.LatLngBounds();
-                    bounds.extend(storeLatLng);
-                    bounds.extend(stationLatLng);
-                    map.fitBounds(bounds);
+                    // 読み込み完了
+                    document.getElementById('mapLoading').style.display = 'none';
+                    document.getElementById('map').style.display = 'block';
                 } else {
-                    document.getElementById('stationDistance').textContent = '位置情報の取得に失敗しました';
+                    console.error('Directions request failed due to ' + status);
+                    document.getElementById('stationDistance').textContent = '距離計算エラー';
                 }
-                
-                document.getElementById('mapLoading').style.display = 'none';
-                document.getElementById('map').style.display = 'block';
             });
         }
         
@@ -492,3 +310,4 @@
     </script>
 </body>
 </html>
+            
