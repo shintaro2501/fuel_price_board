@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>燃料単価掲出ツール</title>
+    <link rel="stylesheet" href="fuel-board-styles.css">
+</head>
+<body>
+    <div class="app-controls">
+        <div class="store-selector">
+            <label for="storeSelect">店舗選択:</label>
+            <select id="storeSelect" class="store-dropdown">
+                <option value="">読み込み中...</option>
+            </select>
+        </div>
+        <div class="print-area">
+            <span class="print-settings">印刷設定：A4・実際のサイズ・ヘッダーフッターなし・背景オンにしてください</span>
+            <button class="print-button" onclick="window.print()">
+                🖨️ 印刷
+            </button>
+        </div>
+    </div>
+    
+    <div class="fuel-board">
+        <div class="header">
+            <div class="header-left">
+                <div class="customer-greeting">ご利用のお客様へ</div>
+            </div>
+            <div class="header-right">
+                <div class="company-name">トヨタレンタカー <span id="storeName">店舗を選択してください</span></div>
+            </div>
+        </div>
+        
+        <div class="notice-box">
+            <div class="notice-small">お車をお返しいただく際は「燃費精算」をどうぞ</div>
+            <div class="notice-large">給油の手間なし！店舗でお支払いいただけます</div>
+        </div>
+        
+        <div class="section-subtitle">🚗 ガソリン代の精算は「燃費精算」をおすすめいたします。</div>
+        
+        <div class="fuel-explanation">
+            <div class="fuel-explanation-title">📊 車のディスプレイに表示される「平均燃費」を使用して燃料代の精算を実施します。</div>
+            
+            <div class="fuel-calculation">
+                <div class="calculation-formula">
+                    <div class="formula-item highlight">
+                        <div class="formula-top">精算金額</div>
+                        <div class="formula-bottom">(燃料代)</div>
+                    </div>
+                    <div class="formula-operator">=</div>
+                    <div class="formula-item highlight2">
+                        <div class="formula-top">走行距離</div>
+                        <div class="formula-bottom">(TRIP)</div>
+                    </div>
+                    <div class="formula-operator">÷</div>
+                    <div class="formula-item highlight2">
+                        <div class="formula-top">平均燃費</div>
+                        <div class="formula-bottom high">(km/L)</div>
+                    </div>
+                    <div class="formula-operator">×</div>
+                    <div class="formula-item highlight2">
+                        <div class="formula-top">燃料単価</div>
+                        <div class="formula-bottom">(1Lあたり)</div>
+                    </div>
+                </div>
+                
+                <div class="warning-notes">
+                    <div class="warning-note">燃費精算は「実施可能な車種」や「途中給油に関する注意事項」がございます。</div>
+                    <div class="warning-note">初めてご利用の場合は、必ず事前にスタッフまでお申し出ください！</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="price-header">
+            <div class="section-subtitle">💰 当店の燃料単価はこちら（税込価格）</div>
+            <div class="update-info" id="updateInfo"><strong>2025-07-15更新</strong></div>
+        </div>
+        
+        <div class="price-section">
+            <div class="fuel-type regular">
+                <div class="fuel-label">レギュラー</div>
+                <div class="fuel-price">
+                    <span id="regularPrice">177</span>
+                    <span class="fuel-unit">円/L</span>
+                </div>
+            </div>
+            
+            <div class="fuel-type diesel">
+                <div class="fuel-label">軽 油</div>
+                <div class="fuel-price">
+                    <span id="dieselPrice">157</span>
+                    <span class="fuel-unit">円/L</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="reference-title">⛽ 現在、下記ガソリンスタンドの価格を採用しております</div>
+        
+        <div class="reference-section">
+            <div class="station-info">
+                <div class="station-name" id="stationName">ENEOS 北本庄 SS（土屋石油）</div>
+                <div class="station-distance" id="stationDistance">当店から0.9 km</div>
+            </div>
+            
+            <div class="map-container">
+                <div id="map" class="location-map" style="display: none;"></div>
+                <div id="mapLoading" class="map-loading">
+                    地図を読み込み中...
+                </div>
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <div class="legend-marker rental"></div>
+                        <span id="legendStoreName">トヨタレンタカー福山駅前店</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-marker gas"></div>
+                        <span id="legendStationName">ENEOS 北本庄 SS（土屋石油）</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script async defer 
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGUorGUfy--oERdupd_6FoUQc-xFR5WbE&callback=initApp">
+    </script>
+    
+    <script>
+        let storesData = [];
+        let map = null;
+        let directionsService = null;
+        let directionsRenderer = null;
+        
+        // 文字列が緯度経度形式かどうかを判定する関数
+        function isCoordinateFormat(str) {
+            if (!str || typeof str !== 'string') return false;
+            // 「広島県」が含まれていない場合は緯度経度とみなす
+            return !str.includes('広島県');
+        }
+        
+        // 度分秒形式の座標を十進数に変換する関数
+        function convertDMSToDecimal(dmsString) {
+            try {
+                // 文字列をクリーンアップ（余分な文字を除去）
+                const cleanString = dmsString.trim().replace(/[""]$/, ''); // 末尾の余分な引用符を除去
+                console.log('変換対象（クリーンアップ後）:', cleanString);
+                
+                // 例: "34°24'20.3"N 132°27'42.9"E" の形式を解析
+                const regex = /(\d+)°(\d+)'([\d.]+)"?([NSEW])\s+(\d+)°(\d+)'([\d.]+)"?([NSEW])/;
+                const match = cleanString.match(regex);
+                
+                if (!match) {
+                    console.error('座標形式が正しくありません:', cleanString);
+                    return null;
+                }
+                
+                // 緯度の計算
+                const latDeg = parseInt(match[1]);
+                const latMin = parseInt(match[2]);
+                const latSec = parseFloat(match[3]);
+                const latDir = match[4];
+                let lat = latDeg + (latMin / 60) + (latSec / 3600);
+                if (latDir === 'S') lat = -lat;
+                
+                // 経度の計算
+                const lngDeg = parseInt(match[5]);
+                const lngMin = parseInt(match[6]);
+                const lngSec = parseFloat(match[7]);
+                const lngDir = match[8];
+                let lng = lngDeg + (lngMin / 60) + (lngSec / 3600);
+                if (lngDir === 'W') lng = -lng;
+                
+                console.log('変換結果:', { lat: lat, lng: lng });
+                return { lat: lat, lng: lng };
+            } catch (error) {
+                console.error('座標変換エラー:', error, 'Input:', dmsString);
+                return null;
+            }
+        }
+        
+        // 2点間の距離を計算（ハバーサイン公式）
+        function calculateDistance(lat1, lng1, lat2, lng2) {
+            const R = 6371; // 地球の半径（km）
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLng/2) * Math.sin(dLng/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const distance = R * c;
+            return distance;
+        }
+        
+        // CSVファイルを読み込み
+        async function loadStoresData() {
+            try {
+                const response = await fetch('./fuel_prices.csv');
+                const csvText = await response.text();
+                
+                // CSVをパース（簡易版）
+                const lines = csvText.trim().split('\n');
+                const headers = lines[0].split(',');
+                
+                storesData = lines.slice(1).map(line => {
+                    const values = line.split(',');
+                    const store = {};
+                    headers.forEach((header, index) => {
+                        store[header.trim()] = values[index] ? values[index].trim() : '';
+                    });
+                    return store;
+                });
+                
+                populateStoreSelector();
+                
+            } catch (error) {
+                console.error('CSVファイルの読み込みエラー:', error);
+                document.getElementById('storeSelect').innerHTML = '<option value="">CSVファイルが見つかりません</option>';
+            }
+        }
+        
+        // 店舗選択ドロップダウンを構築
+        function populateStoreSelector() {
+            const select = document.getElementById('storeSelect');
+            select.innerHTML = '<option value="">店舗を選択してください</option>';
+            
+            storesData.forEach((store, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = store['店舗名'];
+                select.appendChild(option);
+            });
+			// ===== ここから：デフォルト店舗名で選択 =====
+			// ★指定したい店舗名を入力してください（例：'福山駅前店'）
+			const defaultStoreName = '五日市店';
+
+			// 完全一致で検索（前後空白は無視）
+			const defaultIndex = storesData.findIndex(
+				s => (s['店舗名'] || '').trim() === defaultStoreName.trim()
+			);
+
+			if (defaultIndex >= 0) {
+				select.value = String(defaultIndex);
+				updateStoreDisplay(defaultIndex);
+			} else if (storesData.length > 0) {
+				// 見つからなければ先頭を表示（安全なフォールバック）
+				select.value = '0';
+				updateStoreDisplay(0);
+				console.warn('指定した店舗名が見つかりませんでした:', defaultStoreName);
+			}
+        }
+        
+        // 店舗表示を更新
+        function updateStoreDisplay(storeIndex) {
+            if (storeIndex === '' || !storesData[storeIndex]) return;
+            
+            const store = storesData[storeIndex];
+            
+            // 基本情報を更新
+            document.getElementById('storeName').textContent = store['店舗名'];
+            document.getElementById('updateInfo').innerHTML = `<strong>${store['更新日']}更新</strong>`;
+            document.getElementById('regularPrice').textContent = store['レギュラー単価'];
+            document.getElementById('dieselPrice').textContent = store['軽油単価'];
+            document.getElementById('stationName').textContent = store['スタンド名'];
+            document.getElementById('legendStoreName').textContent = `トヨタレンタカー${store['店舗名']}`;
+            document.getElementById('legendStationName').textContent = store['スタンド名'];
+            
+            // 地図を更新（緯度経度を使用）
+            updateMapWithCoordinates(store['店舗住所'], store['緯度経度'], store['店舗名'], store['スタンド名']);
+        }
+        
+        // 地図を座標情報で更新（住所・緯度経度両対応）
+        function updateMapWithCoordinates(storeAddress, stationCoordinates, storeName, stationName) {
+            if (!map) {
+                console.error('地図が初期化されていません');
+                return;
+            }
+            
+            console.log('地図更新開始:', { storeAddress, stationCoordinates, storeName, stationName });
+            
+            try {
+                // ガソリンスタンドの座標を処理
+                let stationPosition;
+                if (isCoordinateFormat(stationCoordinates)) {
+                    // 緯度経度形式の場合
+                    const stationLatLng = convertDMSToDecimal(stationCoordinates);
+                    if (!stationLatLng) {
+                        console.error('ガソリンスタンドの座標変換に失敗しました:', stationCoordinates);
+                        document.getElementById('stationDistance').textContent = 'スタンド座標変換エラー';
+                        return;
+                    }
+                    stationPosition = new google.maps.LatLng(stationLatLng.lat, stationLatLng.lng);
+                    console.log('スタンド位置（緯度経度）:', stationLatLng);
+                } else {
+                    // 住所形式の場合
+                    stationPosition = stationCoordinates;
+                    console.log('スタンド位置（住所）:', stationCoordinates);
+                }
+                
+                // 店舗の座標を処理
+                let storePosition;
+                if (isCoordinateFormat(storeAddress)) {
+                    // 緯度経度形式の場合
+                    const storeLatLng = convertDMSToDecimal(storeAddress);
+                    if (!storeLatLng) {
+                        console.error('店舗の座標変換に失敗しました:', storeAddress);
+                        document.getElementById('stationDistance').textContent = '店舗座標変換エラー';
+                        return;
+                    }
+                    storePosition = new google.maps.LatLng(storeLatLng.lat, storeLatLng.lng);
+                    console.log('店舗位置（緯度経度）:', storeLatLng);
+                } else {
+                    // 住所形式の場合
+                    storePosition = storeAddress;
+                    console.log('店舗位置（住所）:', storeAddress);
+                }
+                
+                // Directions Service でルートを計算
+                console.log('ルート計算開始...');
+                directionsService.route({
+                    origin: storePosition,
+                    destination: stationPosition,
+                    travelMode: google.maps.TravelMode.DRIVING,
+                    avoidHighways: false,
+                    avoidTolls: false
+                }, (response, status) => {
+                    console.log('ルート計算結果:', status);
+                    if (status === 'OK') {
+                        directionsRenderer.setDirections(response);
+                        
+                        // 距離情報を更新
+                        const route = response.routes[0];
+                        const leg = route.legs[0];
+                        const distance = leg.distance.text;
+                        
+                        document.getElementById('stationDistance').textContent = `当店から${distance}`;
+                        
+                        // カスタムマーカーの位置を設定
+                        if (window.startMarker && window.endMarker) {
+                            window.startMarker.setPosition(leg.start_location);
+                            window.endMarker.setPosition(leg.end_location);
+                        }
+                        
+                        // 読み込み完了
+                        document.getElementById('mapLoading').style.display = 'none';
+                        document.getElementById('map').style.display = 'block';
+                        console.log('地図表示完了');
+                    } else {
+                        console.error('Directions request failed due to ' + status);
+                        document.getElementById('stationDistance').textContent = 'ルート計算エラー: ' + status;
+                        
+                        // エラーの場合は座標から直接距離計算を試行
+                        fallbackWithBothCoordinates(storePosition, stationPosition);
+                    }
+                });
+                
+            } catch (error) {
+                console.error('地図更新エラー:', error);
+                document.getElementById('stationDistance').textContent = '地図更新エラー: ' + error.message;
+            }
+        }
+        
+        // フォールバック：両方の座標を処理して距離計算
+        function fallbackWithBothCoordinates(storePosition, stationPosition) {
+            const geocoder = new google.maps.Geocoder();
+            let storeLatLng = null;
+            let stationLatLng = null;
+            
+            // 店舗位置の処理
+            const processStorePosition = () => {
+                return new Promise((resolve) => {
+                    if (storePosition instanceof google.maps.LatLng) {
+                        storeLatLng = storePosition;
+                        resolve();
+                    } else {
+                        geocoder.geocode({ 'address': storePosition }, (results, status) => {
+                            if (status === 'OK') {
+                                storeLatLng = results[0].geometry.location;
+                            }
+                            resolve();
+                        });
+                    }
+                });
+            };
+            
+            // ガソリンスタンド位置の処理
+            const processStationPosition = () => {
+                return new Promise((resolve) => {
+                    if (stationPosition instanceof google.maps.LatLng) {
+                        stationLatLng = stationPosition;
+                        resolve();
+                    } else {
+                        geocoder.geocode({ 'address': stationPosition }, (results, status) => {
+                            if (status === 'OK') {
+                                stationLatLng = results[0].geometry.location;
+                            }
+                            resolve();
+                        });
+                    }
+                });
+            };
+            
+            // 両方の位置を処理してから距離計算
+            Promise.all([processStorePosition(), processStationPosition()]).then(() => {
+                if (storeLatLng && stationLatLng) {
+                    const distance = calculateDistance(
+                        storeLatLng.lat(), storeLatLng.lng(),
+                        stationLatLng.lat(), stationLatLng.lng()
+                    );
+                    document.getElementById('stationDistance').textContent = `当店から約${distance.toFixed(1)} km`;
+                    
+                    // マーカーを配置
+                    if (window.startMarker && window.endMarker) {
+                        window.startMarker.setPosition(storeLatLng);
+                        window.endMarker.setPosition(stationLatLng);
+                    }
+                    
+                    // 地図の表示範囲を調整
+                    const bounds = new google.maps.LatLngBounds();
+                    bounds.extend(storeLatLng);
+                    bounds.extend(stationLatLng);
+                    map.fitBounds(bounds);
+                } else {
+                    document.getElementById('stationDistance').textContent = '位置情報の取得に失敗しました';
+                }
+                
+                document.getElementById('mapLoading').style.display = 'none';
+                document.getElementById('map').style.display = 'block';
+            });
+        }
+        
+        // Google Maps初期化
+        function initMap() {
+            // 地図の初期化
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: { lat: 34.4087, lng: 132.4733 },
+                mapTypeId: 'roadmap',
+                disableDefaultUI: true,
+                zoomControl: true,
+                gestureHandling: 'cooperative'
+            });
+            
+            // 地図の高さを明示的に設定
+            document.getElementById('map').style.height = '300px';
+            
+            // Directions Service とRenderer の作成
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer({
+                polylineOptions: {
+                    strokeColor: '#1976d2',
+                    strokeWeight: 4,
+                    strokeOpacity: 1.0
+                },
+                suppressMarkers: true
+            });
+            
+            directionsRenderer.setMap(map);
+            
+            // カスタムマーカーを作成
+            window.startMarker = new google.maps.Marker({
+                position: null,
+                map: map,
+                title: 'トヨタレンタカー店舗',
+                icon: {
+                    url: './rental-car-icon.svg',
+                    scaledSize: new google.maps.Size(40, 40),
+                    anchor: new google.maps.Point(20, 20)
+                }
+            });
+            
+            window.endMarker = new google.maps.Marker({
+                position: null,
+                map: map,
+                title: 'ガソリンスタンド',
+                icon: {
+                    url: './gas-station-icon.svg',
+                    scaledSize: new google.maps.Size(32, 32),
+                    anchor: new google.maps.Point(16, 16)
+                }
+            });
+            
+            // 地図のリサイズイベントをトリガー
+            google.maps.event.trigger(map, 'resize');
+        }
+        
+        // アプリケーション初期化
+        function initApp() {
+            initMap();
+            loadStoresData();
+            
+            // 店舗選択イベント
+            document.getElementById('storeSelect').addEventListener('change', function() {
+                const storeIndex = this.value;
+                updateStoreDisplay(storeIndex);
+            });
+        }
+        
+        // エラーハンドリング
+        window.gm_authFailure = function() {
+            document.getElementById('mapLoading').innerHTML = 'Google Maps APIキーの設定を確認してください';
+        };
+    </script>
+</body>
+</html>
