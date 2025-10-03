@@ -605,34 +605,3 @@ body {
 }
 .highlight2 {
 }
-/* --- 印刷で背景が消える対策（共通） --- */
-.fuel-type .fuel-label{
-  /* 背景を印刷させる指示（各ブラウザ向け） */
-  -webkit-print-color-adjust: exact;
-  print-color-adjust: exact;
-  /* 念のため：文字抜き系を使っていた場合の保険 */
-  -webkit-text-fill-color: currentColor;
-}
-
-/* --- フォールバックの無地色（グラデが落ちても色は残す） --- */
-.fuel-type.regular .fuel-label{
-  background-color: #FCE7A0; /* お好みで調整 */
-}
-.fuel-type.diesel .fuel-label{
-  background-color: #CDECCB; /* お好みで調整（軽油は濃いめ推奨） */
-}
-
-/* --- 印刷時は確実に塗る（グラデ指定があっても無視して無地色で塗る） --- */
-@media print{
-  .fuel-type .fuel-label{
-    background-image: none !important; /* ここでグラデを切る */
-    /* 上の background-color がそのまま出ます */
-  }
-}
-
-/* （任意）軽油だけ更に確実に濃くするなら */
-@media print{
-  .fuel-type.diesel .fuel-label{
-    background-color: #A6DBA2 !important; /* 少し濃い緑に */
-  }
-}
