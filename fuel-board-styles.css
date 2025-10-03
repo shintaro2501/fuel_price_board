@@ -556,7 +556,15 @@ body {
         height: 300px !important; /* 印刷時の地図の高さ */
         page-break-inside: avoid;
     }
-    
+
+    /* ★ここに追加★ */
+    .fuel-type.regular,
+    .fuel-type.diesel {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+	
     .map-container {
         page-break-inside: avoid;
     }
